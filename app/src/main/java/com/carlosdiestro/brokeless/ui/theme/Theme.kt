@@ -35,7 +35,8 @@ fun BrokelessTheme(
 ) {
     MaterialTheme(
         colorScheme = if (darkTheme) DarkColorScheme else LightColorScheme,
-        typography = Typography,
+        typography = BrokelessTypography,
+        shapes = BrokelessShapes,
         content = content
     )
 }
