@@ -1,4 +1,4 @@
-package com.carlosdiestro.brokeless.ui.theme
+package com.carlosdiestro.brokeless.core.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

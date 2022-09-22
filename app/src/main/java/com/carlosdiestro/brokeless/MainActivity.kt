@@ -10,7 +10,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.carlosdiestro.brokeless.ui.theme.BrokelessTheme
+import com.carlosdiestro.brokeless.core.ui.theme.BrokelessTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
