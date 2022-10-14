@@ -28,7 +28,7 @@ fun BrokelessIconButton(
     containerColor: Color = MaterialTheme.colorScheme.primary,
     @StringRes textId: Int? = null,
     size: BrokelessIconContainerSize,
-    onClick: () -> Unit
+    onClick: () -> Unit = {}
 ) {
     Column(
         modifier = modifier
