@@ -11,6 +11,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -29,7 +30,7 @@ fun TransactionCard(
 ) {
 
     ConstraintLayout(
-        modifier = Modifier
+        modifier = modifier
             .background(MaterialTheme.colorScheme.surface)
             .fillMaxWidth()
     ) {
@@ -65,7 +66,7 @@ fun TransactionCard(
                     fontFamily = Montserrat,
                     fontWeight = FontWeight.SemiBold,
                     color = MaterialTheme.colorScheme.onSurface
-                ),
+                )
             )
             if (transaction.description.isNotEmpty()) {
                 Text(
@@ -102,6 +103,7 @@ fun TransactionCard(
                     fontWeight = FontWeight.Medium,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 ),
+                textAlign = TextAlign.End
             )
             Text(
                 text = transaction.quantityText,
@@ -111,6 +113,7 @@ fun TransactionCard(
                     fontWeight = FontWeight.Medium,
                     color = transaction.colorState
                 ),
+                textAlign = TextAlign.End
             )
         }
     }
