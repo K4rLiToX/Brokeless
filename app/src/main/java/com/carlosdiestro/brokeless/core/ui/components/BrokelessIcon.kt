@@ -20,7 +20,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.carlosdiestro.brokeless.core.ui.components.buttons.BrokelessIconContainerSize
 import com.carlosdiestro.brokeless.core.ui.theme.*
-import com.carlosdiestro.brokeless.ui.theme.*
 import com.carlosdiestro.brokeless.utils.asPercentage
 import com.carlosdiestro.brokeless.utils.directProportion
 
