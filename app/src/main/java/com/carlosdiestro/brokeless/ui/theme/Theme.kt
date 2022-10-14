@@ -62,7 +62,7 @@ fun BrokelessTheme(
 
     MaterialTheme(
         colorScheme = colorScheme,
-        typography = Typography,
+        typography = BrokelessTypography,
         content = content
     )
 }
