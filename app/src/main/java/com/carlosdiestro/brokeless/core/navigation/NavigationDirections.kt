@@ -1,8 +1,14 @@
-package com.carlosdiestro.brokeless.navigation
+package com.carlosdiestro.brokeless.core.navigation
 
 import androidx.navigation.NamedNavArgument
 
 object NavigationDirections {
+    val root = object : NavigationCommand {
+        override val arguments: List<NamedNavArgument>
+            get() = emptyList()
+        override val destination: String
+            get() = Destination.Root
+    }
     val welcome = object : NavigationCommand {
         override val arguments: List<NamedNavArgument>
             get() = emptyList()

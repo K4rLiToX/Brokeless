@@ -1,6 +1,7 @@
-package com.carlosdiestro.brokeless.navigation
+package com.carlosdiestro.brokeless.core.navigation
 
 object Destination {
+    const val Root = "root"
     const val Welcome = "welcome_screen"
 
     object OnBoarding {

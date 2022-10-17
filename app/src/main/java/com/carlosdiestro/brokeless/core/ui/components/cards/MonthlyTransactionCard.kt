@@ -20,7 +20,7 @@ import com.carlosdiestro.brokeless.core.ui.components.buttons.BrokelessIconConta
 import com.carlosdiestro.brokeless.core.ui.theme.JetBrainsMono
 import com.carlosdiestro.brokeless.core.ui.theme.Montserrat
 import com.carlosdiestro.brokeless.core.ui.theme.White
-import com.carlosdiestro.brokeless.wallet.ui.models.MonthlyTransactionPLO
+import com.carlosdiestro.brokeless.main.wallet.ui.models.MonthlyTransactionPLO
 
 @Composable
 fun MonthlyTransactionCard(
