@@ -3,16 +3,19 @@ package com.carlosdiestro.brokeless.core.ui.components.cards
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.carlosdiestro.brokeless.core.ui.components.buttons.BrokelessIconContainerSize
 import com.carlosdiestro.brokeless.core.ui.models.CurrencyPLO
 import com.carlosdiestro.brokeless.core.ui.theme.Montserrat
 
@@ -27,9 +30,14 @@ fun CurrencyCard(
         horizontalArrangement = Arrangement.spacedBy(12.dp, Alignment.CenterHorizontally),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        Icon(painter = painterResource(id = currency.iconId), contentDescription = "Currency Flag")
+        Icon(
+            modifier = Modifier.size(BrokelessIconContainerSize.Medium.size),
+            painter = painterResource(id = currency.iconId),
+            contentDescription = "Currency Flag",
+            tint = Color.Unspecified
+        )
         Text(
-            text = "${currency.name} ${currency.symbol}",
+            text = "${currency.name} (${currency.symbol})",
             style = TextStyle(
                 fontSize = 28.sp,
                 fontFamily = Montserrat,

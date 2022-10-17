@@ -39,7 +39,7 @@ object FrameworkModule {
                 BrokelessDatabase::class.java,
                 "brokeless_db"
             )
-//            .createFromAsset("broklessdb.db")
+            .createFromAsset("databases/database.db")
             .build()
     }
 

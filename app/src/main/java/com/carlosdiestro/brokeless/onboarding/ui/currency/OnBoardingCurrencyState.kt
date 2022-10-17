@@ -1,4 +1,4 @@
-package com.carlosdiestro.brokeless.onboarding.currency
+package com.carlosdiestro.brokeless.onboarding.ui.currency
 
 import com.carlosdiestro.brokeless.core.ui.models.CurrencyPLO
 

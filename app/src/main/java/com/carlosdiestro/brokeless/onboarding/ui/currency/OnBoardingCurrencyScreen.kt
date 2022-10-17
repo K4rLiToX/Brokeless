@@ -1,6 +1,7 @@
-package com.carlosdiestro.brokeless.onboarding.currency
+package com.carlosdiestro.brokeless.onboarding.ui.currency
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -16,6 +17,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.util.lerp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.carlosdiestro.brokeless.R
 import com.carlosdiestro.brokeless.core.navigation.NavigationDirections
@@ -32,7 +34,7 @@ import kotlin.math.absoluteValue
 fun OnBoardingCurrencyScreen(
     navController: NavController,
     onBoardingViewModel: OnBoardingViewModel,
-    viewModel: OnBoardingCurrencyViewModel
+    viewModel: OnBoardingCurrencyViewModel = hiltViewModel()
 ) {
 
     val onBoardingState = onBoardingViewModel.state.collectAsState()
@@ -91,13 +93,11 @@ fun CurrencyList(
 
     ConstraintLayout(
         modifier = modifier
+            .clip(RoundedCornerShape(
+                topStart = 30.dp,
+                topEnd = 30.dp
+            ))
             .background(MaterialTheme.colorScheme.surface)
-            .clip(
-                RoundedCornerShape(
-                    topStart = 30.dp,
-                    topEnd = 30.dp
-                )
-            )
             .padding(24.dp)
     ) {
         val (currencyPager, button) = createRefs()
@@ -111,7 +111,7 @@ fun CurrencyList(
                 )
             )
             snapshotFlow { pagerState.currentPage }.collect { index ->
-                onCurrencyChanged(currencies[index])
+                if (currencies.isNotEmpty()) onCurrencyChanged(currencies[index])
             }
         }
 
@@ -136,7 +136,8 @@ fun CurrencyList(
                     end.linkTo(parent.end)
                     bottom.linkTo(parent.bottom)
                 },
-            textId = R.string.action_next
+            textId = R.string.action_next,
+            rightIconId = R.drawable.ic_chevron_right
         ) {
             onNextClick()
         }
@@ -153,7 +154,8 @@ fun CurrencyPager(
     VerticalPager(
         modifier = modifier,
         count = currencies.size,
-        state = state
+        state = state,
+        contentPadding = PaddingValues(top = 150.dp, bottom = 150.dp)
     ) { index ->
         val currency = currencies[index]
         CurrencyCard(
@@ -161,7 +163,7 @@ fun CurrencyPager(
                 val pageOffset = calculateCurrentOffsetForPage(index).absoluteValue
 
                 lerp(
-                    start = 0.85F,
+                    start = 0.75F,
                     stop = 1F,
                     fraction = 1F - pageOffset.coerceIn(0F, 1F)
                 ).also { scale ->

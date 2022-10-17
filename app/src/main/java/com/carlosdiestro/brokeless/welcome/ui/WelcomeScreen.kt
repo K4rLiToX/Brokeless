@@ -17,6 +17,7 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.carlosdiestro.brokeless.R
+import com.carlosdiestro.brokeless.core.navigation.NavigationDirections
 import com.carlosdiestro.brokeless.core.ui.components.buttons.BrokelessButton
 import com.carlosdiestro.brokeless.core.ui.components.buttons.BrokelessOutlinedButton
 import com.carlosdiestro.brokeless.core.ui.theme.Montserrat
@@ -65,7 +66,7 @@ fun WelcomeScreen(
                             bottom.linkTo(parent.bottom)
                         }
                 ) {
-                    navController.navigate("OnBoarding")
+                    navController.navigate(NavigationDirections.OnBoarding.root.destination)
                 }
             } else {
                 LogInSection(

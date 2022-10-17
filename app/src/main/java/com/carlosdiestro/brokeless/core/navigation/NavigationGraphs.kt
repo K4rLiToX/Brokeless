@@ -2,12 +2,14 @@ package com.carlosdiestro.brokeless.core.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import com.carlosdiestro.brokeless.main.MainScreen
+import com.carlosdiestro.brokeless.onboarding.ui.currency.OnBoardingCurrencyScreen
 import com.carlosdiestro.brokeless.welcome.ui.WelcomeScreen
 
 @Composable
@@ -97,7 +99,10 @@ fun NavGraphBuilder.onBoardingNavGraph(navController: NavHostController) {
         composable(
             route = NavigationDirections.OnBoarding.currency.destination
         ) {
-
+            OnBoardingCurrencyScreen(
+                navController,
+                hiltViewModel()
+            )
         }
 
         composable(

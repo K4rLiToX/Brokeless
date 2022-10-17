@@ -13,7 +13,7 @@ import javax.inject.Inject
 @HiltViewModel
 class WelcomeViewModel @Inject constructor(
     private val isFirstTimeUseCase: GetFirstTimeUseCase
-): ViewModel() {
+) : ViewModel() {
 
     private var _state: MutableStateFlow<WelcomeState> = MutableStateFlow(WelcomeState())
     val state = _state.asStateFlow()
