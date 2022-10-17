@@ -34,8 +34,11 @@ fun WalletCard(
     lightColor: Color,
     mediumColor: Color,
     darkColor: Color,
+    isLarge: Boolean,
     onClick: () -> Unit
 ) {
+
+    //TODO(Use medium and dark colors for decoration )
 
     Card(
         modifier = modifier
@@ -55,9 +58,9 @@ fun WalletCard(
         Text(
             text = stringResource(id = title),
             style = TextStyle(
-                fontSize = 14.sp,
+                fontSize = if (isLarge) 16.sp else 14.sp,
                 fontFamily = Montserrat,
-                fontWeight = FontWeight.Medium
+                fontWeight = if (isLarge) FontWeight.SemiBold else FontWeight.Medium
             )
         )
         val quantityText =
@@ -65,7 +68,7 @@ fun WalletCard(
         Text(
             text = quantityText,
             style = TextStyle(
-                fontSize = 20.sp,
+                fontSize = if (isLarge) 40.sp else 20.sp,
                 fontFamily = JetBrainsMono,
                 fontWeight = FontWeight.Bold
             )
