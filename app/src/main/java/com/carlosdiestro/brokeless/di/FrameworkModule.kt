@@ -1,7 +1,7 @@
 package com.carlosdiestro.brokeless.di
 
 import android.content.Context
-import com.carlosdiestro.brokeless.core.framework.UserPreferencesService
+import com.carlosdiestro.brokeless.core.framework.preferences.UserPreferencesService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
