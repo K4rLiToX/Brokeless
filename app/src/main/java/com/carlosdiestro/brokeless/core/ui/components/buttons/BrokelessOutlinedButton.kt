@@ -26,7 +26,7 @@ fun BrokelessOutlinedButton(
     OutlinedButton(
         modifier = modifier
             .fillMaxWidth(),
-        contentPadding = PaddingValues(16.dp),
+        contentPadding = PaddingValues(20.dp),
         onClick = { onClick() },
         colors = ButtonDefaults.outlinedButtonColors(
             contentColor = MaterialTheme.colorScheme.onPrimary
