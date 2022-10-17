@@ -1,3 +1,75 @@
 <resources>
     <string name="app_name">Brokeless</string>
+    <string name="app_slogan">Being in the red was never an option</string>
+
+    <string name="action_get_started">Get Started!</string>
+    <string name="action_access_fingerprint">Access with Fingerprint</string>
+    <string name="action_access_pin_or_pattern">Access with Pin or Pattern</string>
+    <string name="action_next">Next</string>
+    <string name="action_back">Back</string>
+    <string name="action_finish">Finish</string>
+    <string name="action_add">Add</string>
+    <string name="action_new_month">New month</string>
+    <string name="action_pay">Pay</string>
+    <string name="action_spent">Spent</string>
+    <string name="action_received">Received</string>
+    <string name="action_continue">Continue</string>
+    <string name="action_overview">Overview</string>
+    <string name="action_categories">Categories</string>
+    <string name="action_no_limit">No Limit</string>
+    <string name="action_update">Update</string>
+
+    <string name="category_job">Job</string>
+    <string name="category_house">House</string>
+    <string name="category_groceries">Groceries</string>
+    <string name="category_transport">Transport</string>
+    <string name="category_shopping">Shopping</string>
+    <string name="category_social">Social</string>
+    <string name="category_culture">Culture</string>
+    <string name="category_sports">Sports</string>
+    <string name="category_healthcare">Healthcare</string>
+    <string name="category_travel">Travel</string>
+    <string name="category_education">Education</string>
+    <string name="category_subscriptions">Subscriptions</string>
+    <string name="category_pets">Pets</string>
+    <string name="category_family_friends">Family &amp; Friends</string>
+
+    <string name="section_budget">Budget</string>
+    <string name="section_transactions">Transactions</string>
+    <string name="section_new_payment">New Payment</string>
+    <string name="section_new_addition">New Addition</string>
+    <string name="section_new_income">New Income</string>
+    <string name="section_new_expense">New Expense</string>
+    <string name="section_wallet">Wallet</string>
+    <string name="section_statistics">Statistics</string>
+
+    <string name="header_on_boarding_currency">Let\'s start by choosing your currency</string>
+    <string name="header_on_boarding_balance">How about your total balance?</string>
+    <string name="header_on_boarding_incomes">Time for some monthly incomes…</string>
+    <string name="header_on_boarding_expenses">…some monthly expenses too…</string>
+    <string name="header_on_boarding_savings">…and finally monthly savings!</string>
+
+    <string name="subsection_on_boarding_savings_question">How much would you like to save up every month?</string>
+    <string name="subsection_on_boarding_savings_question_info">Deducted from incomes</string>
+    <string name="subsection_on_boarding_savings_final_overview">Final Overview</string>
+    <string name="subsection_budget_recent_transactions">Recent Transactions</string>
+    <string name="subsection_new_movement_choose_category">Choose a category</string>
+    <string name="subsection_wallet_monthly">Monthly</string>
+    <string name="subsection_category_overview_monthly_limit">Monthly Limit</string>
+
+
+    <string name="title_balance">Balance</string>
+    <string name="title_available">Available</string>
+    <string name="title_savings">Savings</string>
+    <string name="title_incomes">Incomes</string>
+    <string name="title_expenses">Expenses</string>
+
+
+    <string name="text_of">of</string>
+
+    <string name="label_concept">Concept</string>
+    <string name="label_description">Description</string>
+
+    <string name="placeholder_percentage">%s%%</string>
+
 </resources>
