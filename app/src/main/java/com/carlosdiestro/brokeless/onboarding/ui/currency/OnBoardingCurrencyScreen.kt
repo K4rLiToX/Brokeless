@@ -30,6 +30,7 @@ import com.carlosdiestro.brokeless.onboarding.components.OnBoardingHeader
 import com.google.accompanist.pager.*
 import kotlin.math.absoluteValue
 
+@OptIn(ExperimentalPagerApi::class)
 @Composable
 fun OnBoardingCurrencyScreen(
     navController: NavController,
@@ -42,6 +43,23 @@ fun OnBoardingCurrencyScreen(
 
     val selectedCurrency = onBoardingState.value.selectedCurrency
     val currencies = state.value.currencies
+
+    val pagerState = rememberPagerState()
+
+    LaunchedEffect(key1 = currencies) {
+        if (selectedCurrency != null) {
+            pagerState.scrollToPage(
+                currencies.indexOf(
+                    selectedCurrency
+                )
+            )
+        }
+        snapshotFlow { pagerState.currentPage }.collect { index ->
+            if (currencies.isNotEmpty()) {
+                onBoardingViewModel.onEvent(OnBoardingEvent.UpdateSelectedCurrency(currencies[index]))
+            }
+        }
+    }
 
     ConstraintLayout(
         modifier = Modifier
@@ -60,21 +78,19 @@ fun OnBoardingCurrencyScreen(
             textId = R.string.header_on_boarding_currency
         )
 
-        CurrencyList(
-            modifier = Modifier.constrainAs(content) {
-                start.linkTo(parent.start)
-                top.linkTo(header.bottom, margin = 40.dp)
-                end.linkTo(parent.end)
-                bottom.linkTo(parent.bottom)
-                height = Dimension.fillToConstraints
-                width = Dimension.fillToConstraints
-            },
+        CurrencyContent(
+            modifier = Modifier
+                .constrainAs(content) {
+                    start.linkTo(parent.start)
+                    top.linkTo(header.bottom, margin = 40.dp)
+                    end.linkTo(parent.end)
+                    bottom.linkTo(parent.bottom)
+                    height = Dimension.fillToConstraints
+                    width = Dimension.fillToConstraints
+                },
             currencies = currencies,
-            selectedCurrency = selectedCurrency,
-            onCurrencyChanged = { newCurrency ->
-                onBoardingViewModel.onEvent(OnBoardingEvent.UpdateSelectedCurrency(newCurrency))
-            },
-            {
+            pagerState = pagerState,
+            onNextClick = {
                 navController.navigate(NavigationDirections.OnBoarding.balance.destination)
             }
         )
@@ -83,37 +99,25 @@ fun OnBoardingCurrencyScreen(
 
 @OptIn(ExperimentalPagerApi::class)
 @Composable
-fun CurrencyList(
+fun CurrencyContent(
     modifier: Modifier = Modifier,
     currencies: List<CurrencyPLO>,
-    selectedCurrency: CurrencyPLO?,
-    onCurrencyChanged: (CurrencyPLO) -> Unit,
+    pagerState: PagerState,
     onNextClick: () -> Unit
 ) {
 
     ConstraintLayout(
         modifier = modifier
-            .clip(RoundedCornerShape(
-                topStart = 30.dp,
-                topEnd = 30.dp
-            ))
+            .clip(
+                RoundedCornerShape(
+                    topStart = 30.dp,
+                    topEnd = 30.dp
+                )
+            )
             .background(MaterialTheme.colorScheme.surface)
             .padding(24.dp)
     ) {
         val (currencyPager, button) = createRefs()
-
-        val pagerState = rememberPagerState()
-
-        LaunchedEffect(key1 = pagerState) {
-            if (selectedCurrency != null) pagerState.scrollToPage(
-                currencies.indexOf(
-                    selectedCurrency
-                )
-            )
-            snapshotFlow { pagerState.currentPage }.collect { index ->
-                if (currencies.isNotEmpty()) onCurrencyChanged(currencies[index])
-            }
-        }
 
         CurrencyPager(
             modifier = Modifier

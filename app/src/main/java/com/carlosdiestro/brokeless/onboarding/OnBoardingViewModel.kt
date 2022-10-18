@@ -10,14 +10,16 @@ import javax.inject.Inject
 
 @HiltViewModel
 class OnBoardingViewModel @Inject constructor(
+
 ) : ViewModel() {
 
     private var _state: MutableStateFlow<OnBoardingState> = MutableStateFlow(OnBoardingState())
     val state = _state.asStateFlow()
 
     fun onEvent(event: OnBoardingEvent) {
-        when(event) {
+        when (event) {
             is OnBoardingEvent.UpdateSelectedCurrency -> updateCurrency(event.currency)
+            is OnBoardingEvent.UpdateTotalBalance     -> updateTotalBalance(event.balance)
         }
     }
 
@@ -26,6 +28,27 @@ class OnBoardingViewModel @Inject constructor(
             it.copy(
                 selectedCurrency = currency
             )
+        }
+    }
+
+    private fun updateTotalBalance(balance: String) {
+        when (balance) {
+            "delete" -> _state.update {
+                it.copy(
+                    totalBalance = it.totalBalance.dropLast(1)
+                )
+            }
+            else     -> _state.update {
+                if (it.totalBalance == "0.0") {
+                    it.copy(
+                        totalBalance = balance
+                    )
+                } else {
+                    it.copy(
+                        totalBalance = it.totalBalance.plus(balance)
+                    )
+                }
+            }
         }
     }
 }

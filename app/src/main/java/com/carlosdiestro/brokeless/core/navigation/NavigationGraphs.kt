@@ -1,6 +1,7 @@
 package com.carlosdiestro.brokeless.core.navigation
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavGraphBuilder
@@ -9,6 +10,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import com.carlosdiestro.brokeless.main.MainScreen
+import com.carlosdiestro.brokeless.onboarding.OnBoardingViewModel
+import com.carlosdiestro.brokeless.onboarding.ui.balance.OnBoardingBalanceScreen
 import com.carlosdiestro.brokeless.onboarding.ui.currency.OnBoardingCurrencyScreen
 import com.carlosdiestro.brokeless.welcome.ui.WelcomeScreen
 
@@ -91,7 +94,9 @@ fun MainNavGraph(
     }
 }
 
-fun NavGraphBuilder.onBoardingNavGraph(navController: NavHostController) {
+fun NavGraphBuilder.onBoardingNavGraph(
+    navController: NavHostController
+) {
     navigation(
         route = NavigationDirections.OnBoarding.root.destination,
         startDestination = NavigationDirections.OnBoarding.currency.destination
@@ -99,16 +104,27 @@ fun NavGraphBuilder.onBoardingNavGraph(navController: NavHostController) {
         composable(
             route = NavigationDirections.OnBoarding.currency.destination
         ) {
+            val parentEntry = remember(it) {
+                navController.getBackStackEntry(NavigationDirections.OnBoarding.root.destination)
+            }
+            val parentViewModel = hiltViewModel<OnBoardingViewModel>(parentEntry)
             OnBoardingCurrencyScreen(
                 navController,
-                hiltViewModel()
+                parentViewModel
             )
         }
 
         composable(
             route = NavigationDirections.OnBoarding.balance.destination
         ) {
-
+            val parentEntry = remember(it) {
+                navController.getBackStackEntry(NavigationDirections.OnBoarding.root.destination)
+            }
+            val parentViewModel = hiltViewModel<OnBoardingViewModel>(parentEntry)
+            OnBoardingBalanceScreen(
+                navController,
+                parentViewModel
+            )
         }
 
         composable(
@@ -130,4 +146,3 @@ fun NavGraphBuilder.onBoardingNavGraph(navController: NavHostController) {
         }
     }
 }
-
