@@ -13,6 +13,7 @@ import com.carlosdiestro.brokeless.main.MainScreen
 import com.carlosdiestro.brokeless.onboarding.OnBoardingViewModel
 import com.carlosdiestro.brokeless.onboarding.ui.balance.OnBoardingBalanceScreen
 import com.carlosdiestro.brokeless.onboarding.ui.currency.OnBoardingCurrencyScreen
+import com.carlosdiestro.brokeless.onboarding.ui.expenses.OnBoardingExpensesScreen
 import com.carlosdiestro.brokeless.onboarding.ui.incomes.OnBoardingIncomesScreen
 import com.carlosdiestro.brokeless.onboarding.ui.new_transaction.OnBoardingNewTransactionScreen
 import com.carlosdiestro.brokeless.welcome.ui.WelcomeScreen
@@ -145,7 +146,14 @@ fun NavGraphBuilder.onBoardingNavGraph(
         composable(
             route = NavigationDirections.OnBoarding.expenses.destination
         ) {
-
+            val parentEntry = remember(it) {
+                navController.getBackStackEntry(NavigationDirections.OnBoarding.root.destination)
+            }
+            val parentViewModel = hiltViewModel<OnBoardingViewModel>(parentEntry)
+            OnBoardingExpensesScreen(
+                navController,
+                parentViewModel
+            )
         }
 
         composable(
@@ -155,7 +163,8 @@ fun NavGraphBuilder.onBoardingNavGraph(
         }
 
         composable(
-            route = NavigationDirections.OnBoarding.newTransaction.destination
+            route = "${NavigationDirections.OnBoarding.newTransaction.destination}/{isExpense}",
+            arguments = NavigationDirections.OnBoarding.newTransaction.arguments
         ) {
             val parentEntry = remember(it) {
                 navController.getBackStackEntry(NavigationDirections.OnBoarding.root.destination)
@@ -163,7 +172,8 @@ fun NavGraphBuilder.onBoardingNavGraph(
             val parentViewModel = hiltViewModel<OnBoardingViewModel>(parentEntry)
             OnBoardingNewTransactionScreen(
                 navController,
-                parentViewModel
+                parentViewModel,
+                it.arguments?.getBoolean("isExpense")!!
             )
         }
     }

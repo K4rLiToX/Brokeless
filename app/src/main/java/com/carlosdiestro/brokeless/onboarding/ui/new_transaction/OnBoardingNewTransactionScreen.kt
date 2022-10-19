@@ -44,6 +44,7 @@ import kotlin.math.absoluteValue
 fun OnBoardingNewTransactionScreen(
     navController: NavController,
     onBoardingViewModel: OnBoardingViewModel,
+    isExpense: Boolean = false,
     viewModel: OnBoardingNewTransactionViewModel = hiltViewModel()
 ) {
     val onBoardingState = onBoardingViewModel.state.collectAsState()
@@ -160,7 +161,7 @@ fun OnBoardingNewTransactionScreen(
                             concept = concept,
                             category = selectedCategory!!,
                             isActive = true,
-                            quantity = totalQuantity.toDouble()
+                            quantity =  if (!isExpense) totalQuantity.toDouble() else ("-$totalQuantity").toDouble()
                         )
                     ))
                     navController.popBackStack()

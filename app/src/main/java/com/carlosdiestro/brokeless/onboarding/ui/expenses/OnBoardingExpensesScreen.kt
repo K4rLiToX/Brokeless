@@ -1,4 +1,4 @@
-package com.carlosdiestro.brokeless.onboarding.ui.incomes
+package com.carlosdiestro.brokeless.onboarding.ui.expenses
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize
@@ -32,23 +32,23 @@ import com.carlosdiestro.brokeless.main.wallet.ui.models.MonthlyTransactionPLO
 import com.carlosdiestro.brokeless.onboarding.OnBoardingViewModel
 import com.carlosdiestro.brokeless.onboarding.components.OnBoardingButtons
 import com.carlosdiestro.brokeless.onboarding.components.OnBoardingHeader
-import com.carlosdiestro.brokeless.utils.incomes
+import com.carlosdiestro.brokeless.utils.expenses
 import com.carlosdiestro.brokeless.utils.total
 
 @Composable
-fun OnBoardingIncomesScreen(
+fun OnBoardingExpensesScreen(
     navController: NavController,
     onBoardingViewModel: OnBoardingViewModel
 ) {
     val onBoardingState = onBoardingViewModel.state.collectAsState()
     val currency = onBoardingState.value.selectedCurrency
-    val incomes = onBoardingState.value.fixedTransactions.incomes()
-    val total = incomes.total()
+    val expenses = onBoardingState.value.fixedTransactions.expenses()
+    val total = expenses.total()
 
     ConstraintLayout(
         modifier = Modifier.fillMaxSize()
     ) {
-        val (header, incomeTotal, content) = createRefs()
+        val (header, expenseTotal, content) = createRefs()
 
         OnBoardingHeader(
             modifier = Modifier
@@ -58,12 +58,12 @@ fun OnBoardingIncomesScreen(
                     end.linkTo(parent.end)
                 }
                 .padding(horizontal = 24.dp),
-            textId = R.string.header_on_boarding_incomes
+            textId = R.string.header_on_boarding_expenses
         )
 
         BrokelessQuantity(
             modifier = Modifier
-                .constrainAs(incomeTotal) {
+                .constrainAs(expenseTotal) {
                     start.linkTo(parent.start)
                     top.linkTo(header.bottom, margin = 52.dp)
                     end.linkTo(parent.end)
@@ -77,35 +77,35 @@ fun OnBoardingIncomesScreen(
             )
         )
 
-        OnBoardingIncomesContent(
+        OnBoardingExpensesContent(
             modifier = Modifier
                 .constrainAs(content) {
                     start.linkTo(parent.start)
-                    top.linkTo(incomeTotal.bottom, margin = 36.dp)
+                    top.linkTo(expenseTotal.bottom, margin = 36.dp)
                     end.linkTo(parent.end)
                     bottom.linkTo(parent.bottom)
                     height = Dimension.fillToConstraints
                     width = Dimension.fillToConstraints
                 },
-            incomes = incomes,
+            expenses = expenses,
             currency = currency,
             onBackClick = {
                 navController.popBackStack()
             },
             onNextClick = {
-                navController.navigate(NavigationDirections.OnBoarding.expenses.destination)
+                navController.navigate(NavigationDirections.OnBoarding.savings.destination)
             },
             onAddClick = {
-                navController.navigate("${NavigationDirections.OnBoarding.newTransaction.destination}/false")
+                navController.navigate("${NavigationDirections.OnBoarding.newTransaction.destination}/true")
             }
         )
     }
 }
 
 @Composable
-fun OnBoardingIncomesContent(
+fun OnBoardingExpensesContent(
     modifier: Modifier = Modifier,
-    incomes: List<MonthlyTransactionPLO>,
+    expenses: List<MonthlyTransactionPLO>,
     currency: CurrencyPLO,
     onBackClick: () -> Unit,
     onNextClick: () -> Unit,
@@ -123,11 +123,11 @@ fun OnBoardingIncomesContent(
             .background(MaterialTheme.colorScheme.surface)
             .padding(24.dp)
     ) {
-        val (incomeList, newIncome, buttons) = createRefs()
+        val (expenseList, newExpense, buttons) = createRefs()
 
-        IncomeList(
+        ExpenseList(
             modifier = Modifier
-                .constrainAs(incomeList) {
+                .constrainAs(expenseList) {
                     start.linkTo(parent.start)
                     top.linkTo(parent.top)
                     end.linkTo(parent.end)
@@ -135,13 +135,13 @@ fun OnBoardingIncomesContent(
                     height = Dimension.fillToConstraints
                     width = Dimension.fillToConstraints
                 },
-            items = incomes,
+            items = expenses,
             currency = currency
         )
 
         FloatingActionButton(
             modifier = Modifier
-                .constrainAs(newIncome) {
+                .constrainAs(newExpense) {
                     start.linkTo(parent.start)
                     end.linkTo(parent.end)
                     bottom.linkTo(buttons.top, margin = 56.dp)
@@ -165,7 +165,7 @@ fun OnBoardingIncomesContent(
                     end.linkTo(parent.end)
                     bottom.linkTo(parent.bottom)
                 },
-            enabled = incomes.isNotEmpty(),
+            enabled = expenses.isNotEmpty(),
             onBackClicked = onBackClick,
             onNextClicked = onNextClick
         )
@@ -173,7 +173,7 @@ fun OnBoardingIncomesContent(
 }
 
 @Composable
-fun IncomeList(
+fun ExpenseList(
     modifier: Modifier = Modifier,
     items: List<MonthlyTransactionPLO>,
     currency: CurrencyPLO

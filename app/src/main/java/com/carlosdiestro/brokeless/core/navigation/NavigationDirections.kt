@@ -1,6 +1,8 @@
 package com.carlosdiestro.brokeless.core.navigation
 
 import androidx.navigation.NamedNavArgument
+import androidx.navigation.NavType
+import androidx.navigation.navArgument
 
 object NavigationDirections {
     val root = object : NavigationCommand {
@@ -55,7 +57,9 @@ object NavigationDirections {
         }
         val newTransaction = object : NavigationCommand {
             override val arguments: List<NamedNavArgument>
-                get() = emptyList()
+                get() = listOf(
+                    navArgument("isExpense") { type = NavType.BoolType }
+                )
             override val destination: String
                 get() = Destination.OnBoarding.NewTransaction
         }
