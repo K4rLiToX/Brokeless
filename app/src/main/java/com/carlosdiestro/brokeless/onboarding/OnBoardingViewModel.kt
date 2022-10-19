@@ -2,6 +2,7 @@ package com.carlosdiestro.brokeless.onboarding
 
 import androidx.lifecycle.ViewModel
 import com.carlosdiestro.brokeless.core.ui.models.CurrencyPLO
+import com.carlosdiestro.brokeless.main.wallet.ui.models.MonthlyTransactionPLO
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -20,6 +21,7 @@ class OnBoardingViewModel @Inject constructor(
         when (event) {
             is OnBoardingEvent.UpdateSelectedCurrency -> updateCurrency(event.currency)
             is OnBoardingEvent.UpdateTotalBalance     -> updateTotalBalance(event.balance)
+            is OnBoardingEvent.UpdateFixedTransactions -> updateFixedTransactions(event.fixedTransaction)
         }
     }
 
@@ -49,6 +51,14 @@ class OnBoardingViewModel @Inject constructor(
                     )
                 }
             }
+        }
+    }
+
+    private fun updateFixedTransactions(fixedTransaction: MonthlyTransactionPLO) {
+        _state.update {
+            it.copy(
+                fixedTransactions = it.fixedTransactions.plus(fixedTransaction)
+            )
         }
     }
 }

@@ -11,6 +11,7 @@ object Destination {
         const val Incomes = "on_boarding_incomes_screen"
         const val Expenses = "on_boarding_expenses_screen"
         const val Savings = "on_boarding_savings_screen"
+        const val NewTransaction = "on_boarding_new_transaction"
     }
 
     object Main {
@@ -36,10 +37,6 @@ object Destination {
             const val Category = "statistics_category_screen"
         }
 
-        object NewTransaction {
-            const val Root = "new_transaction_root"
-            const val Quantity = "new_transaction_quantity"
-            const val AdditionalInfo = "new_transaction_additional_info"
-        }
+        const val NewTransaction = "new_transaction"
     }
 }

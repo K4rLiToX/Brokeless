@@ -53,6 +53,12 @@ object NavigationDirections {
             override val destination: String
                 get() = Destination.OnBoarding.Savings
         }
+        val newTransaction = object : NavigationCommand {
+            override val arguments: List<NamedNavArgument>
+                get() = emptyList()
+            override val destination: String
+                get() = Destination.OnBoarding.NewTransaction
+        }
     }
 
     object Main {

@@ -19,16 +19,19 @@ import androidx.constraintlayout.compose.Dimension
 import com.carlosdiestro.brokeless.R
 import com.carlosdiestro.brokeless.core.ui.components.BrokelessIcon
 import com.carlosdiestro.brokeless.core.ui.components.BrokelessIconProgress
+import com.carlosdiestro.brokeless.core.ui.components.BrokelessQuantity
 import com.carlosdiestro.brokeless.core.ui.components.buttons.BrokelessIconButton
 import com.carlosdiestro.brokeless.core.ui.components.buttons.BrokelessIconButtonResource
 import com.carlosdiestro.brokeless.core.ui.components.buttons.BrokelessIconContainerSize
 import com.carlosdiestro.brokeless.core.ui.models.CategoryPLO
+import com.carlosdiestro.brokeless.core.ui.models.CurrencyPLO
 import com.carlosdiestro.brokeless.core.ui.theme.*
 
 @Composable
 fun CategoryCard(
     modifier: Modifier = Modifier,
     category: CategoryPLO,
+    currency: CurrencyPLO,
     spent: Double?,
     differencePercentage: Int?,
     isStatisticsScreen: Boolean = false,
@@ -88,12 +91,9 @@ fun CategoryCard(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.spacedBy(12.dp)
             ) {
-                val spentText =
-                    if (category.currency.goesFirst) "${category.currency.symbol}$spent" else "$spent${category.currency.symbol}"
-                val limitText =
-                    if (category.currency.goesFirst) "${category.currency.symbol}${category.limit}" else "${category.limit}${category.currency.symbol}"
-                Text(
-                    text = if (isStatisticsScreen) spentText else limitText,
+                BrokelessQuantity(
+                    quantity = if (isStatisticsScreen) spent.toString() else "${category.limit}",
+                    currency = currency,
                     style = TextStyle(
                         fontSize = 20.sp,
                         fontFamily = JetBrainsMono,

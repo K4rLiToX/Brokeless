@@ -13,6 +13,8 @@ import com.carlosdiestro.brokeless.main.MainScreen
 import com.carlosdiestro.brokeless.onboarding.OnBoardingViewModel
 import com.carlosdiestro.brokeless.onboarding.ui.balance.OnBoardingBalanceScreen
 import com.carlosdiestro.brokeless.onboarding.ui.currency.OnBoardingCurrencyScreen
+import com.carlosdiestro.brokeless.onboarding.ui.incomes.OnBoardingIncomesScreen
+import com.carlosdiestro.brokeless.onboarding.ui.new_transaction.OnBoardingNewTransactionScreen
 import com.carlosdiestro.brokeless.welcome.ui.WelcomeScreen
 
 @Composable
@@ -130,7 +132,14 @@ fun NavGraphBuilder.onBoardingNavGraph(
         composable(
             route = NavigationDirections.OnBoarding.incomes.destination
         ) {
-
+            val parentEntry = remember(it) {
+                navController.getBackStackEntry(NavigationDirections.OnBoarding.root.destination)
+            }
+            val parentViewModel = hiltViewModel<OnBoardingViewModel>(parentEntry)
+            OnBoardingIncomesScreen(
+                navController,
+                parentViewModel
+            )
         }
 
         composable(
@@ -143,6 +152,19 @@ fun NavGraphBuilder.onBoardingNavGraph(
             route = NavigationDirections.OnBoarding.savings.destination
         ) {
 
+        }
+
+        composable(
+            route = NavigationDirections.OnBoarding.newTransaction.destination
+        ) {
+            val parentEntry = remember(it) {
+                navController.getBackStackEntry(NavigationDirections.OnBoarding.root.destination)
+            }
+            val parentViewModel = hiltViewModel<OnBoardingViewModel>(parentEntry)
+            OnBoardingNewTransactionScreen(
+                navController,
+                parentViewModel
+            )
         }
     }
 }

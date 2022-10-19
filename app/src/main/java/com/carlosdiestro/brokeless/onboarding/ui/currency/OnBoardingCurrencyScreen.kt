@@ -163,7 +163,7 @@ fun CurrencyPager(
     ) { index ->
         val currency = currencies[index]
         CurrencyCard(
-            modifier = modifier.graphicsLayer {
+            modifier = Modifier.graphicsLayer {
                 val pageOffset = calculateCurrentOffsetForPage(index).absoluteValue
 
                 lerp(

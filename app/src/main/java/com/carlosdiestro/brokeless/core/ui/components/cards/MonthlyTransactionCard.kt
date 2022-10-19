@@ -16,7 +16,9 @@ import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
 import com.carlosdiestro.brokeless.core.ui.components.BrokelessIcon
+import com.carlosdiestro.brokeless.core.ui.components.BrokelessQuantity
 import com.carlosdiestro.brokeless.core.ui.components.buttons.BrokelessIconContainerSize
+import com.carlosdiestro.brokeless.core.ui.models.CurrencyPLO
 import com.carlosdiestro.brokeless.core.ui.theme.JetBrainsMono
 import com.carlosdiestro.brokeless.core.ui.theme.Montserrat
 import com.carlosdiestro.brokeless.core.ui.theme.White
@@ -26,6 +28,7 @@ import com.carlosdiestro.brokeless.main.wallet.ui.models.MonthlyTransactionPLO
 fun MonthlyTransactionCard(
     modifier: Modifier = Modifier,
     monthlyTransaction: MonthlyTransactionPLO,
+    currency: CurrencyPLO,
     isFilled: Boolean = false
 ) {
 
@@ -73,7 +76,7 @@ fun MonthlyTransactionCard(
             )
         )
 
-        Text(
+        BrokelessQuantity(
             modifier = Modifier
                 .constrainAs(quantity) {
                     start.linkTo(concept.end, margin = 16.dp)
@@ -82,14 +85,15 @@ fun MonthlyTransactionCard(
                     bottom.linkTo(concept.bottom)
                     width = Dimension.fillToConstraints
                 },
-            text = monthlyTransaction.quantityText,
+            quantity = monthlyTransaction.quantity.toString(),
+            currency = currency,
             style = TextStyle(
                 fontSize = 18.sp,
                 fontFamily = JetBrainsMono,
                 fontWeight = FontWeight.Medium,
-                color = MaterialTheme.colorScheme.onSurface
-            ),
-            textAlign = TextAlign.End
+                color = MaterialTheme.colorScheme.onSurface,
+                textAlign = TextAlign.End
+            )
         )
     }
 }

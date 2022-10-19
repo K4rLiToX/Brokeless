@@ -3,6 +3,7 @@ package com.carlosdiestro.brokeless.di
 import android.content.Context
 import androidx.room.Room
 import com.carlosdiestro.brokeless.core.framework.database.BrokelessDatabase
+import com.carlosdiestro.brokeless.core.framework.database.category.CategoryDao
 import com.carlosdiestro.brokeless.core.framework.database.currency.CurrencyDao
 import com.carlosdiestro.brokeless.core.framework.preferences.UserPreferencesService
 import dagger.Module
@@ -46,4 +47,8 @@ object FrameworkModule {
     @Singleton
     @Provides
     fun provideCurrencyDao(db: BrokelessDatabase): CurrencyDao = db.currencyDao()
+
+    @Singleton
+    @Provides
+    fun provideCategoryDao(db: BrokelessDatabase): CategoryDao = db.categoryDao()
 }

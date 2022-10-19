@@ -33,8 +33,8 @@ fun BrokelessIcon(
 ) {
     Box(
         modifier = modifier
-            .background(containerColor)
             .clip(RoundedCornerShape(100))
+            .background(containerColor)
             .size(size.size)
             .padding(9.dp),
         contentAlignment = Alignment.Center
