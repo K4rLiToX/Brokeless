@@ -1,8 +1,9 @@
-package com.carlosdiestro.brokeless.utils
+package com.carlosdiestro.brokeless.utils.mappers
 
 import com.carlosdiestro.brokeless.core.domain.models.Category
 import com.carlosdiestro.brokeless.core.framework.database.category.CategoryEntity
 import com.carlosdiestro.brokeless.core.ui.models.CategoryPLO
+import com.carlosdiestro.brokeless.utils.ResourceManager
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 

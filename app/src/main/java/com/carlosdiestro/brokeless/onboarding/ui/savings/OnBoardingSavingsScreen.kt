@@ -1,8 +1,6 @@
 package com.carlosdiestro.brokeless.onboarding.ui.savings
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.*
@@ -11,7 +9,6 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.platform.SoftwareKeyboardController
 import androidx.compose.ui.res.stringResource
@@ -25,7 +22,6 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
 import androidx.navigation.NavController
 import com.carlosdiestro.brokeless.R
-import com.carlosdiestro.brokeless.core.navigation.NavigationDirections
 import com.carlosdiestro.brokeless.core.ui.components.cards.MonthlyTransactionCard
 import com.carlosdiestro.brokeless.core.ui.models.CurrencyPLO
 import com.carlosdiestro.brokeless.core.ui.theme.JetBrainsMono
@@ -114,15 +110,7 @@ fun SavingsContent(
 ) {
 
     ConstraintLayout(
-        modifier = modifier
-            .clip(
-                RoundedCornerShape(
-                    topStart = 30.dp,
-                    topEnd = 30.dp
-                )
-            )
-            .background(MaterialTheme.colorScheme.surface)
-            .padding(24.dp)
+        modifier = modifier.brokelessContentStyle()
     ) {
         val (question, savingsTextField, savingsPercentageSection, overviewSection, buttons) = createRefs()
 

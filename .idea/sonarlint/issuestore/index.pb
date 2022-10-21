@@ -29,18 +29,8 @@ lapp/src/main/java/com/carlosdiestro/brokeless/onboarding/ui/new_transaction/OnB
 \app/src/main/java/com/carlosdiestro/brokeless/core/ui/components/cards/SimpleCategoryCard.kt,d\4\d4b63ce2e17f5cbac1da93d580ea973bb603c95c
 Å
 Qapp/src/main/java/com/carlosdiestro/brokeless/core/ui/components/BrokelessIcon.kt,c\0\c0f4fe52db64f92461720c0757113ff91dabf558
-Ö
-Uapp/src/main/java/com/carlosdiestro/brokeless/core/navigation/NavigationDirections.kt,2\5\25ad780e60e5c13c13e46667a32691b95469b3b1
-ù
-mapp/src/main/java/com/carlosdiestro/brokeless/onboarding/ui/new_transaction/OnBoardingNewTransactionScreen.kt,8\4\848a5d92ab730df9bca2386e0c0e937791494da4
-ê
-`app/src/main/java/com/carlosdiestro/brokeless/onboarding/ui/currency/OnBoardingCurrencyScreen.kt,f\6\f686af4ef5cd10fa43bcd08ab180ce6d31aabfda
 p
 @app/src/main/java/com/carlosdiestro/brokeless/utils/MathUtils.kt,b\e\be9f7e729d21bab89db0bf7e0502fa6dd4eadeae
-ê
-`app/src/main/java/com/carlosdiestro/brokeless/onboarding/ui/expenses/OnBoardingExpensesScreen.kt,4\e\4e5f502cfcb561e70de2bddfdabb1009dad527a7
-é
-^app/src/main/java/com/carlosdiestro/brokeless/onboarding/ui/incomes/OnBoardingIncomesScreen.kt,1\4\1484caca362968170eef2cc0cbff6b8dd1e50ed8
 ê
 `app/src/main/java/com/carlosdiestro/brokeless/core/ui/components/cards/MonthlyTransactionCard.kt,1\b\1b0879c564ba3320ec7b0150bc87febde5d85fb1
 á
@@ -53,5 +43,3 @@ papp/src/main/java/com/carlosdiestro/brokeless/onboarding/ui/new_transaction/OnB
 ]app/src/main/java/com/carlosdiestro/brokeless/core/domain/usecases/ValidateQuantityUseCase.kt,e\0\e0d450b95c95b9da67210f5c44b5c98285744140
 ë
 aapp/src/main/java/com/carlosdiestro/brokeless/onboarding/ui/balance/OnBoardingBalanceViewModel.kt,4\8\48a7500413a75a4095ee0f50564e4f6c80078ef8
-é
-^app/src/main/java/com/carlosdiestro/brokeless/onboarding/ui/balance/OnBoardingBalanceScreen.kt,5\d\5db9527a2ba1b4a32d5da2fdbc4df96a3d7cecdd

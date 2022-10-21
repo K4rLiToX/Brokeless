@@ -1,15 +1,11 @@
 package com.carlosdiestro.brokeless.onboarding.ui.balance
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -27,6 +23,7 @@ import com.carlosdiestro.brokeless.onboarding.OnBoardingEvent
 import com.carlosdiestro.brokeless.onboarding.OnBoardingViewModel
 import com.carlosdiestro.brokeless.onboarding.components.OnBoardingButtons
 import com.carlosdiestro.brokeless.onboarding.components.OnBoardingHeader
+import com.carlosdiestro.brokeless.utils.brokelessContentStyle
 
 @Composable
 fun OnBoardingBalanceScreen(
@@ -92,7 +89,9 @@ fun OnBoardingBalanceScreen(
                 onBoardingViewModel.onEvent(OnBoardingEvent.UpdateTotalBalance(value))
             },
             onNextClicked = {
-                navController.navigate(NavigationDirections.OnBoarding.incomes.destination)
+                navController.navigate(
+                    "${NavigationDirections.OnBoarding.monthlyTransactions.destination}/true"
+                )
             },
             onBackClicked = {
                 navController.popBackStack()
@@ -110,15 +109,7 @@ fun BalanceContent(
     onBackClicked: () -> Unit
 ) {
     ConstraintLayout(
-        modifier = modifier
-            .clip(
-                RoundedCornerShape(
-                    topStart = 30.dp,
-                    topEnd = 30.dp
-                )
-            )
-            .background(MaterialTheme.colorScheme.surface)
-            .padding(24.dp)
+        modifier = modifier.brokelessContentStyle()
     ) {
         val (keyboard, buttons) = createRefs()
 

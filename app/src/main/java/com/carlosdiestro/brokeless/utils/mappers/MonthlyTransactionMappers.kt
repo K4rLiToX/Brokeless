@@ -1,4 +1,4 @@
-package com.carlosdiestro.brokeless.utils
+package com.carlosdiestro.brokeless.utils.mappers
 
 import com.carlosdiestro.brokeless.core.domain.models.MonthlyTransaction
 import com.carlosdiestro.brokeless.core.framework.database.middle_tables.MonthlyTransactionsWithCategory

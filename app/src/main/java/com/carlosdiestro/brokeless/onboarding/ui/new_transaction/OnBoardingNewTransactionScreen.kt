@@ -12,13 +12,11 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.compose.ui.util.lerp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -35,7 +33,8 @@ import com.carlosdiestro.brokeless.core.ui.theme.Montserrat
 import com.carlosdiestro.brokeless.main.wallet.ui.models.MonthlyTransactionPLO
 import com.carlosdiestro.brokeless.onboarding.OnBoardingEvent
 import com.carlosdiestro.brokeless.onboarding.OnBoardingViewModel
-import com.carlosdiestro.brokeless.utils.round
+import com.carlosdiestro.brokeless.utils.brokelessContentStyle
+import com.carlosdiestro.brokeless.utils.pagerAnimation
 import com.google.accompanist.pager.*
 import kotlin.math.absoluteValue
 
@@ -155,15 +154,17 @@ fun OnBoardingNewTransactionScreen(
                 isAdditionalInfoValid = isAdditionalInfoValid,
                 pagerState = pagerState,
                 onFinishClick = {
-                    onBoardingViewModel.onEvent(OnBoardingEvent.UpdateFixedTransactions(
-                        MonthlyTransactionPLO(
-                            id = -1,
-                            concept = concept,
-                            category = selectedCategory!!,
-                            isActive = true,
-                            quantity =  if (!isExpense) totalQuantity.toDouble() else ("-$totalQuantity").toDouble()
+                    onBoardingViewModel.onEvent(
+                        OnBoardingEvent.UpdateFixedTransactions(
+                            MonthlyTransactionPLO(
+                                id = -1,
+                                concept = concept,
+                                category = selectedCategory!!,
+                                isActive = true,
+                                quantity = if (!isExpense) totalQuantity.toDouble() else ("-$totalQuantity").toDouble()
+                            )
                         )
-                    ))
+                    )
                     navController.popBackStack()
                 },
                 onConceptValueChange = {
@@ -186,15 +187,7 @@ fun NewTransactionContentFirst(
 ) {
 
     ConstraintLayout(
-        modifier = modifier
-            .clip(
-                RoundedCornerShape(
-                    topStart = 30.dp,
-                    topEnd = 30.dp
-                )
-            )
-            .background(MaterialTheme.colorScheme.surface)
-            .padding(24.dp)
+        modifier = modifier.brokelessContentStyle()
     ) {
         val (keyboard, button) = createRefs()
 
@@ -395,25 +388,9 @@ fun CategoryPager(
         contentPadding = PaddingValues(start = 120.dp, end = 120.dp)
     ) { index ->
         val category = categories[index]
+        val pageOffset = calculateCurrentOffsetForPage(index).absoluteValue
         SimpleCategoryCard(
-            modifier = Modifier.graphicsLayer {
-                val pageOffset = calculateCurrentOffsetForPage(index).absoluteValue
-
-                lerp(
-                    start = 0.75F,
-                    stop = 1F,
-                    fraction = 1F - pageOffset.coerceIn(0F, 1F)
-                ).also { scale ->
-                    scaleX = scale
-                    scaleY = scale
-                }
-
-                alpha = lerp(
-                    start = 0.5f,
-                    stop = 1f,
-                    fraction = 1f - pageOffset.coerceIn(0f, 1f)
-                )
-            },
+            modifier = Modifier.pagerAnimation(pageOffset),
             iconId = category.iconId
         )
     }

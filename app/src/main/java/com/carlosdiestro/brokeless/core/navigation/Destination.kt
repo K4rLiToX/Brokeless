@@ -8,8 +8,7 @@ object Destination {
         const val Root = "on_boarding_root"
         const val Currency = "on_boarding_currency_screen"
         const val Balance = "on_boarding_balance_screen"
-        const val Incomes = "on_boarding_incomes_screen"
-        const val Expenses = "on_boarding_expenses_screen"
+        const val MonthlyTransactions = "on_boarding_monthly_transactions"
         const val Savings = "on_boarding_savings_screen"
         const val NewTransaction = "on_boarding_new_transaction"
     }

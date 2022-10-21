@@ -37,17 +37,13 @@ object NavigationDirections {
             override val destination: String
                 get() = Destination.OnBoarding.Balance
         }
-        val incomes = object : NavigationCommand {
+        val monthlyTransactions = object : NavigationCommand {
             override val arguments: List<NamedNavArgument>
-                get() = emptyList()
+                get() = listOf(
+                    navArgument("isIncome") { type = NavType.BoolType }
+                )
             override val destination: String
-                get() = Destination.OnBoarding.Incomes
-        }
-        val expenses = object : NavigationCommand {
-            override val arguments: List<NamedNavArgument>
-                get() = emptyList()
-            override val destination: String
-                get() = Destination.OnBoarding.Expenses
+                get() = Destination.OnBoarding.MonthlyTransactions
         }
         val savings = object : NavigationCommand {
             override val arguments: List<NamedNavArgument>

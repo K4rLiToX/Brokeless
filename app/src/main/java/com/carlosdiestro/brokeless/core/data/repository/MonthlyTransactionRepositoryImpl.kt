@@ -3,8 +3,8 @@ package com.carlosdiestro.brokeless.core.data.repository
 import com.carlosdiestro.brokeless.core.domain.models.MonthlyTransaction
 import com.carlosdiestro.brokeless.core.domain.repository.MonthlyTransactionRepository
 import com.carlosdiestro.brokeless.core.framework.database.montthly_transactions.MonthlyTransactionDao
-import com.carlosdiestro.brokeless.utils.toDomain
-import com.carlosdiestro.brokeless.utils.toEntity
+import com.carlosdiestro.brokeless.utils.mappers.toDomain
+import com.carlosdiestro.brokeless.utils.mappers.toEntity
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 

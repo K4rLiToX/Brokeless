@@ -2,7 +2,7 @@ package com.carlosdiestro.brokeless.onboarding.domain.usecases
 
 import com.carlosdiestro.brokeless.core.ui.models.CurrencyPLO
 import com.carlosdiestro.brokeless.onboarding.domain.repository.CurrencyRepository
-import com.carlosdiestro.brokeless.utils.toPLO
+import com.carlosdiestro.brokeless.utils.mappers.toPLO
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 

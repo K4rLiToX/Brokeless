@@ -1,8 +1,9 @@
-package com.carlosdiestro.brokeless.utils
+package com.carlosdiestro.brokeless.utils.mappers
 
 import com.carlosdiestro.brokeless.core.domain.models.Currency
 import com.carlosdiestro.brokeless.core.framework.database.currency.CurrencyEntity
 import com.carlosdiestro.brokeless.core.ui.models.CurrencyPLO
+import com.carlosdiestro.brokeless.utils.ResourceManager
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 

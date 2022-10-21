@@ -3,7 +3,7 @@ package com.carlosdiestro.brokeless.onboarding.domain.usecases
 import com.carlosdiestro.brokeless.core.domain.repository.MonthlyTransactionRepository
 import com.carlosdiestro.brokeless.core.ui.models.CurrencyPLO
 import com.carlosdiestro.brokeless.main.wallet.ui.models.MonthlyTransactionPLO
-import com.carlosdiestro.brokeless.utils.toDomain
+import com.carlosdiestro.brokeless.utils.mappers.toDomain
 import com.carlosdiestro.brokeless.core.domain.repository.UserPreferencesRepository
 import javax.inject.Inject
 
