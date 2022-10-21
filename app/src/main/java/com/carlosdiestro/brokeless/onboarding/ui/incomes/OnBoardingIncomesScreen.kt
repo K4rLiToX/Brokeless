@@ -42,7 +42,7 @@ fun OnBoardingIncomesScreen(
 ) {
     val onBoardingState = onBoardingViewModel.state.collectAsState()
     val currency = onBoardingState.value.selectedCurrency
-    val incomes = onBoardingState.value.fixedTransactions.incomes()
+    val incomes = onBoardingState.value.monthlyTransactions.incomes()
     val total = incomes.total()
 
     ConstraintLayout(
@@ -183,7 +183,9 @@ fun IncomeList(
     ) {
         items(items) { income ->
             MonthlyTransactionCard(
-                monthlyTransaction = income,
+                iconId = income.category.iconId,
+                concept = income.concept,
+                quantity = income.quantity,
                 currency = currency
             )
         }

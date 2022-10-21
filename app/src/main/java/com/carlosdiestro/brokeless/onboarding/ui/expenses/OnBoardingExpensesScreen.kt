@@ -42,7 +42,7 @@ fun OnBoardingExpensesScreen(
 ) {
     val onBoardingState = onBoardingViewModel.state.collectAsState()
     val currency = onBoardingState.value.selectedCurrency
-    val expenses = onBoardingState.value.fixedTransactions.expenses()
+    val expenses = onBoardingState.value.monthlyTransactions.expenses()
     val total = expenses.total()
 
     ConstraintLayout(
@@ -181,9 +181,11 @@ fun ExpenseList(
     LazyColumn(
         modifier = modifier
     ) {
-        items(items) { income ->
+        items(items) { expense ->
             MonthlyTransactionCard(
-                monthlyTransaction = income,
+                iconId = expense.category.iconId,
+                concept = expense.concept,
+                quantity = expense.quantity,
                 currency = currency
             )
         }

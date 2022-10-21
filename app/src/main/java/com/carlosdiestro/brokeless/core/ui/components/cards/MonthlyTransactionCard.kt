@@ -1,5 +1,6 @@
 package com.carlosdiestro.brokeless.core.ui.components.cards
 
+import androidx.annotation.DrawableRes
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -27,7 +28,9 @@ import com.carlosdiestro.brokeless.main.wallet.ui.models.MonthlyTransactionPLO
 @Composable
 fun MonthlyTransactionCard(
     modifier: Modifier = Modifier,
-    monthlyTransaction: MonthlyTransactionPLO,
+    @DrawableRes iconId: Int,
+    concept: String,
+    quantity: Double,
     currency: CurrencyPLO,
     isFilled: Boolean = false
 ) {
@@ -47,7 +50,7 @@ fun MonthlyTransactionCard(
             .background(MaterialTheme.colorScheme.surface)
             .fillMaxWidth()
     ) {
-        val (category, concept, quantity) = createRefs()
+        val (category, conceptSection, quantitySection) = createRefs()
 
         BrokelessIcon(
             modifier = Modifier
@@ -56,36 +59,36 @@ fun MonthlyTransactionCard(
                     top.linkTo(parent.top)
                     bottom.linkTo(parent.bottom)
                 },
-            iconId = monthlyTransaction.category.iconId,
+            iconId = iconId,
             size = BrokelessIconContainerSize.Small
         )
 
         Text(
             modifier = Modifier
-                .constrainAs(concept) {
+                .constrainAs(conceptSection) {
                     start.linkTo(category.end, margin = 16.dp)
                     top.linkTo(category.top)
                     bottom.linkTo(category.bottom)
                 },
-            text = monthlyTransaction.concept,
+            text = concept,
             style = TextStyle(
                 fontSize = 16.sp,
                 fontFamily = Montserrat,
-                fontWeight = FontWeight.SemiBold,
+                fontWeight = FontWeight.Medium ,
                 color = MaterialTheme.colorScheme.onSurface
             )
         )
 
         BrokelessQuantity(
             modifier = Modifier
-                .constrainAs(quantity) {
-                    start.linkTo(concept.end, margin = 16.dp)
-                    top.linkTo(concept.top)
+                .constrainAs(quantitySection) {
+                    start.linkTo(conceptSection.end, margin = 16.dp)
+                    top.linkTo(conceptSection.top)
                     end.linkTo(parent.end)
-                    bottom.linkTo(concept.bottom)
+                    bottom.linkTo(conceptSection.bottom)
                     width = Dimension.fillToConstraints
                 },
-            quantity = monthlyTransaction.quantity.toString(),
+            quantity = quantity.toString(),
             currency = currency,
             style = TextStyle(
                 fontSize = 18.sp,

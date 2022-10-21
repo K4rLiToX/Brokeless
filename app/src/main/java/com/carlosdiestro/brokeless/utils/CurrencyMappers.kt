@@ -29,3 +29,11 @@ fun CurrencyEntity.toDomain(): Currency = Currency(
 fun List<CurrencyEntity>.toDomain(): List<Currency> = this.map { it.toDomain() }
 
 fun Flow<List<CurrencyEntity>>.toDomain(): Flow<List<Currency>> = this.map { it.toDomain() }
+
+fun CurrencyPLO.toDomain(): Currency = Currency(
+    id = id,
+    name = name,
+    symbol = symbol,
+    goesFirst = goesFirst,
+    iconId = ResourceManager.toDrawableValue(iconId)
+)

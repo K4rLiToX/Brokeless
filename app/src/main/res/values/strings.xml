@@ -63,6 +63,7 @@
     <string name="title_savings">Savings</string>
     <string name="title_incomes">Incomes</string>
     <string name="title_expenses">Expenses</string>
+    <string name="title_monthly_budget">Monthly Budget</string>
 
 
     <string name="text_of">of</string>

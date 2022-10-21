@@ -118,23 +118,21 @@ class OnBoardingNewTransactionViewModel @Inject constructor(
 
     private fun updateQuantity(value: String) {
         viewModelScope.launch {
-            _state.update {
-                if (it.quantity == "0.0") {
+            when(value) {
+                "delete" -> _state.update {
                     it.copy(
-                        quantity = value
+                        quantity = it.quantity.dropLast(1)
                     )
-                } else {
-                    when (value) {
-                        "delete" -> {
-                            it.copy(
-                                quantity = it.quantity.dropLast(1)
-                            )
-                        }
-                        else     -> {
-                            it.copy(
-                                quantity = it.quantity.plus(value)
-                            )
-                        }
+                }
+                else -> _state.update {
+                    if (it.quantity == "0.0") {
+                        it.copy(
+                            quantity = value
+                        )
+                    } else {
+                        it.copy(
+                            quantity = it.quantity.plus(value)
+                        )
                     }
                 }
             }
