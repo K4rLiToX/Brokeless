@@ -8,6 +8,5 @@ class CategoryPLO(
     @StringRes val textId: Int,
     @DrawableRes val iconId: Int,
     val isActive: Boolean,
-    val limit: Double?,
-    val currency: CurrencyPLO
+    val limit: Double?
 )

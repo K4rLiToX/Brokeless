@@ -17,11 +17,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
-import com.carlosdiestro.brokeless.budget.ui.TransactionPLO
 import com.carlosdiestro.brokeless.core.ui.components.BrokelessIcon
 import com.carlosdiestro.brokeless.core.ui.components.buttons.BrokelessIconContainerSize
 import com.carlosdiestro.brokeless.core.ui.theme.JetBrainsMono
 import com.carlosdiestro.brokeless.core.ui.theme.Montserrat
+import com.carlosdiestro.brokeless.main.budget.ui.models.TransactionPLO
 
 @Composable
 fun TransactionCard(

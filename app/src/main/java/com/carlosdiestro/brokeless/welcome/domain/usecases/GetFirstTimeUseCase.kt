@@ -1,6 +1,6 @@
 package com.carlosdiestro.brokeless.welcome.domain.usecases
 
-import com.carlosdiestro.brokeless.welcome.domain.repository.UserPreferencesRepository
+import com.carlosdiestro.brokeless.core.domain.repository.UserPreferencesRepository
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
