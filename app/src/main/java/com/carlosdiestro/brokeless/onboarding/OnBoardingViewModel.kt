@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.carlosdiestro.brokeless.core.ui.models.CurrencyPLO
 import com.carlosdiestro.brokeless.main.wallet.ui.models.MonthlyTransactionPLO
+import com.carlosdiestro.brokeless.onboarding.domain.usecases.MarkOnBoardingAsDoneUseCase
 import com.carlosdiestro.brokeless.onboarding.domain.usecases.SaveInitialInformationUseCase
 import com.carlosdiestro.brokeless.utils.*
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -15,7 +16,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class OnBoardingViewModel @Inject constructor(
-    private val saveInitialInformationUseCase: SaveInitialInformationUseCase
+    private val saveInitialInformationUseCase: SaveInitialInformationUseCase,
+    private val markOnBoardingAsDoneUseCase: MarkOnBoardingAsDoneUseCase
 ) : ViewModel() {
 
     private var _state: MutableStateFlow<OnBoardingState> = MutableStateFlow(OnBoardingState())
@@ -83,6 +85,7 @@ class OnBoardingViewModel @Inject constructor(
                 monthlyTransactions = state.value.monthlyTransactions,
                 savingsPercentage = state.value.savingsPercentage
             )
+            markOnBoardingAsDoneUseCase()
         }
     }
 

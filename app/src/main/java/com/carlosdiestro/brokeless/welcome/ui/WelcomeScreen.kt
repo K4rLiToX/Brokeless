@@ -76,7 +76,14 @@ fun WelcomeScreen(
                             top.linkTo(logoSection.bottom, margin = 56.dp)
                             end.linkTo(parent.end)
                         },
-                    fingerPrintAction = { /*TODO(Popup fingerprint dialog)*/ },
+                    fingerPrintAction = {
+                        navController.navigate(NavigationDirections.Main.root.destination) {
+                            popUpTo(NavigationDirections.welcome.destination) {
+                                inclusive = true
+                            }
+                        }
+                        /*TODO(Popup fingerprint dialog)*/
+                    },
                     pinAction = { /*TODO(Popup pin or pattern dialog)*/ }
                 )
             }

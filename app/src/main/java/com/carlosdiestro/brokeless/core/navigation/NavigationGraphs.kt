@@ -8,8 +8,10 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navigation
 import com.carlosdiestro.brokeless.main.MainScreen
+import com.carlosdiestro.brokeless.main.budget.ui.BudgetScreen
 import com.carlosdiestro.brokeless.onboarding.OnBoardingViewModel
 import com.carlosdiestro.brokeless.onboarding.ui.balance.OnBoardingBalanceScreen
 import com.carlosdiestro.brokeless.onboarding.ui.currency.OnBoardingCurrencyScreen
@@ -36,7 +38,8 @@ fun RootNavGraph(
         composable(
             route = NavigationDirections.Main.root.destination
         ) {
-            MainScreen(navHostController)
+            val mainNavHostController = rememberNavController()
+            MainScreen(mainNavHostController)
         }
     }
 }
@@ -55,7 +58,7 @@ fun MainNavGraph(
         composable(
             route = NavigationDirections.Main.budget.destination
         ) {
-
+            BudgetScreen(navController)
         }
         composable(
             route = NavigationDirections.Main.transactions.destination
