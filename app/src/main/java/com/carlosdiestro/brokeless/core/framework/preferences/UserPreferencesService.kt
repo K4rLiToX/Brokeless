@@ -90,7 +90,8 @@ class UserPreferencesService @Inject constructor(
         }
     }
 
-    val available: Flow<Double> = context.userPreferences.data.map { pref -> pref[AVAILABLE] ?: 0.0 }
+    val available: Flow<Double> =
+        context.userPreferences.data.map { pref -> pref[AVAILABLE] ?: 0.0 }
 
     suspend fun updateAvailable(value: Double) {
         context.userPreferences.edit { pref ->

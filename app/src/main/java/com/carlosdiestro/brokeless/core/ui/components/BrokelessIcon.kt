@@ -73,12 +73,12 @@ class BrokelessIconProgress(
         get() {
             val percentage = proportion.asPercentage()
             return when {
-                percentage > 100 -> Black
-                percentage == 100.0 -> Red50
+                percentage > 100            -> Black
+                percentage == 100.0         -> Red50
                 percentage in (75.0..99.99) -> Red40
                 percentage in (50.0..74.99) -> Orange30
-                percentage in (0.0..49.99) -> Green
-                else -> Black
+                percentage in (0.0..49.99)  -> Green
+                else                        -> Black
             }
         }
 }

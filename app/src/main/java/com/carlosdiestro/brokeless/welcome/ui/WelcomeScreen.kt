@@ -71,7 +71,7 @@ fun WelcomeScreen(
             } else {
                 LogInSection(
                     modifier = Modifier
-                        .constrainAs(logInSection){
+                        .constrainAs(logInSection) {
                             start.linkTo(parent.start)
                             top.linkTo(logoSection.bottom, margin = 56.dp)
                             end.linkTo(parent.end)

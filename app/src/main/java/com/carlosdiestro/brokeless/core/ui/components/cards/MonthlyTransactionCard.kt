@@ -23,7 +23,6 @@ import com.carlosdiestro.brokeless.core.ui.models.CurrencyPLO
 import com.carlosdiestro.brokeless.core.ui.theme.JetBrainsMono
 import com.carlosdiestro.brokeless.core.ui.theme.Montserrat
 import com.carlosdiestro.brokeless.core.ui.theme.White
-import com.carlosdiestro.brokeless.main.wallet.ui.models.MonthlyTransactionPLO
 
 @Composable
 fun MonthlyTransactionCard(
@@ -74,7 +73,7 @@ fun MonthlyTransactionCard(
             style = TextStyle(
                 fontSize = 16.sp,
                 fontFamily = Montserrat,
-                fontWeight = FontWeight.Medium ,
+                fontWeight = FontWeight.Medium,
                 color = MaterialTheme.colorScheme.onSurface
             )
         )

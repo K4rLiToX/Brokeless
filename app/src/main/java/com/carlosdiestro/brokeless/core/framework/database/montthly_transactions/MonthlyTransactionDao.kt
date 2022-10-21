@@ -1,10 +1,6 @@
 package com.carlosdiestro.brokeless.core.framework.database.montthly_transactions
 
-import androidx.room.Dao
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.Query
-import androidx.room.Update
+import androidx.room.*
 import com.carlosdiestro.brokeless.core.framework.database.middle_tables.MonthlyTransactionsWithCategory
 import kotlinx.coroutines.flow.Flow
 

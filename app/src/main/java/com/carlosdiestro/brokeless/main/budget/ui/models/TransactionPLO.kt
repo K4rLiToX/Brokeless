@@ -17,7 +17,7 @@ class TransactionPLO(
 ) {
     val colorState: Color
         get() {
-            return if(quantity > 0) Green else Red40
+            return if (quantity > 0) Green else Red40
         }
     val quantityText: String
         get() {

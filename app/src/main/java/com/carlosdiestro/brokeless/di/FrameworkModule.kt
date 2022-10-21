@@ -55,5 +55,6 @@ object FrameworkModule {
 
     @Singleton
     @Provides
-    fun provideMonthlyTransactionDao(db: BrokelessDatabase): MonthlyTransactionDao = db.monthlyTransactionDao()
+    fun provideMonthlyTransactionDao(db: BrokelessDatabase): MonthlyTransactionDao =
+        db.monthlyTransactionDao()
 }

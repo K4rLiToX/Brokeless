@@ -10,13 +10,14 @@ import com.carlosdiestro.brokeless.core.ui.models.CurrencyPLO
 
 @Composable
 fun BrokelessQuantity(
-    modifier: Modifier =  Modifier,
+    modifier: Modifier = Modifier,
     quantity: String,
     currency: CurrencyPLO,
     style: TextStyle
 ) {
 
-    val quantityText = if (currency.goesFirst) "${currency.symbol}$quantity" else "$quantity${currency.symbol}"
+    val quantityText =
+        if (currency.goesFirst) "${currency.symbol}$quantity" else "$quantity${currency.symbol}"
 
     Text(
         modifier = modifier.wrapContentHeight(),

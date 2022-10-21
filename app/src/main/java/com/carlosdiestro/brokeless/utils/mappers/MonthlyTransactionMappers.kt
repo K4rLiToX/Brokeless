@@ -15,12 +15,14 @@ fun MonthlyTransactionsWithCategory.toDomain(): MonthlyTransaction = MonthlyTran
     isActive = monthlyTransaction.isActive
 )
 
-fun List<MonthlyTransactionsWithCategory>.toDomain(): List<MonthlyTransaction> = this.map { it.toDomain() }
+fun List<MonthlyTransactionsWithCategory>.toDomain(): List<MonthlyTransaction> =
+    this.map { it.toDomain() }
 
-fun Flow<List<MonthlyTransactionsWithCategory>>.toDomain(): Flow<List<MonthlyTransaction>> = this.map { it.toDomain() }
+fun Flow<List<MonthlyTransactionsWithCategory>>.toDomain(): Flow<List<MonthlyTransaction>> =
+    this.map { it.toDomain() }
 
 fun MonthlyTransaction.toEntity(): MonthlyTransactionEntity = MonthlyTransactionEntity(
-    id = if(id == -1) null else id,
+    id = if (id == -1) null else id,
     concept = concept,
     quantity = quantity,
     categoryId = category.id,
@@ -39,7 +41,8 @@ fun MonthlyTransaction.toPLO(): MonthlyTransactionPLO = MonthlyTransactionPLO(
 
 fun List<MonthlyTransaction>.toPLO(): List<MonthlyTransactionPLO> = this.map { it.toPLO() }
 
-fun Flow<List<MonthlyTransaction>>.toPLO(): Flow<List<MonthlyTransactionPLO>> = this.map { it.toPLO() }
+fun Flow<List<MonthlyTransaction>>.toPLO(): Flow<List<MonthlyTransactionPLO>> =
+    this.map { it.toPLO() }
 
 fun MonthlyTransactionPLO.toDomain(): MonthlyTransaction = MonthlyTransaction(
     id = id,

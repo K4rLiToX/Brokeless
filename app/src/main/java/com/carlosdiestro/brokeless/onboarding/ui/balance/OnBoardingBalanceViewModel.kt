@@ -15,11 +15,12 @@ class OnBoardingBalanceViewModel @Inject constructor(
     private val validateQuantityUseCase: ValidateQuantityUseCase
 ) : ViewModel() {
 
-    private var _state: MutableStateFlow<OnBoardingBalanceState> = MutableStateFlow(OnBoardingBalanceState())
+    private var _state: MutableStateFlow<OnBoardingBalanceState> =
+        MutableStateFlow(OnBoardingBalanceState())
     val state = _state.asStateFlow()
 
     fun onEvent(event: OnBoardingBalanceEvent) {
-        when(event) {
+        when (event) {
             is OnBoardingBalanceEvent.ValidateBalance -> validateQuantity(event.value)
         }
     }
