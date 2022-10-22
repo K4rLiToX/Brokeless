@@ -6,6 +6,7 @@ import com.carlosdiestro.brokeless.core.framework.database.BrokelessDatabase
 import com.carlosdiestro.brokeless.core.framework.database.category.CategoryDao
 import com.carlosdiestro.brokeless.core.framework.database.currency.CurrencyDao
 import com.carlosdiestro.brokeless.core.framework.database.montthly_transactions.MonthlyTransactionDao
+import com.carlosdiestro.brokeless.core.framework.database.transaction.TransactionDao
 import com.carlosdiestro.brokeless.core.framework.preferences.UserPreferencesService
 import dagger.Module
 import dagger.Provides
@@ -57,4 +58,9 @@ object FrameworkModule {
     @Provides
     fun provideMonthlyTransactionDao(db: BrokelessDatabase): MonthlyTransactionDao =
         db.monthlyTransactionDao()
+
+    @Singleton
+    @Provides
+    fun provideTransactionDao(db: BrokelessDatabase): TransactionDao =
+        db.transactionDao()
 }

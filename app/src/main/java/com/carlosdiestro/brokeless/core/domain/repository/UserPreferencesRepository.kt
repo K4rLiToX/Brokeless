@@ -1,6 +1,7 @@
 package com.carlosdiestro.brokeless.core.domain.repository
 
 import com.carlosdiestro.brokeless.core.domain.models.Currency
+import com.carlosdiestro.brokeless.main.budget.domain.models.Budget
 import kotlinx.coroutines.flow.Flow
 
 interface UserPreferencesRepository {
@@ -22,4 +23,11 @@ interface UserPreferencesRepository {
 
     fun savings(): Flow<Double>
     suspend fun updateSavings(value: Double)
+
+    fun budget(): Flow<Budget>
+    suspend fun updateCurrentBudget(value: Double)
+    suspend fun updateTotalBudget(value: Double)
+
+    fun period(): Flow<Long>
+    suspend fun updatePeriod(date: String)
 }

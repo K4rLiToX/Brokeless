@@ -6,15 +6,19 @@ import androidx.datastore.preferences.core.*
 import androidx.datastore.preferences.preferencesDataStore
 import com.carlosdiestro.brokeless.core.domain.models.Currency
 import com.carlosdiestro.brokeless.core.framework.preferences.UserPreferencesService.UserPreferencesKeys.AVAILABLE
+import com.carlosdiestro.brokeless.core.framework.preferences.UserPreferencesService.UserPreferencesKeys.BUDGET_CURRENT
+import com.carlosdiestro.brokeless.core.framework.preferences.UserPreferencesService.UserPreferencesKeys.BUDGET_TOTAL
 import com.carlosdiestro.brokeless.core.framework.preferences.UserPreferencesService.UserPreferencesKeys.CURRENCY_GOES_FIRST
 import com.carlosdiestro.brokeless.core.framework.preferences.UserPreferencesService.UserPreferencesKeys.CURRENCY_ICON
 import com.carlosdiestro.brokeless.core.framework.preferences.UserPreferencesService.UserPreferencesKeys.CURRENCY_ID
 import com.carlosdiestro.brokeless.core.framework.preferences.UserPreferencesService.UserPreferencesKeys.CURRENCY_NAME
 import com.carlosdiestro.brokeless.core.framework.preferences.UserPreferencesService.UserPreferencesKeys.CURRENCY_SYMBOL
 import com.carlosdiestro.brokeless.core.framework.preferences.UserPreferencesService.UserPreferencesKeys.IS_FIRST_TIME
+import com.carlosdiestro.brokeless.core.framework.preferences.UserPreferencesService.UserPreferencesKeys.PERIOD
 import com.carlosdiestro.brokeless.core.framework.preferences.UserPreferencesService.UserPreferencesKeys.SAVINGS
 import com.carlosdiestro.brokeless.core.framework.preferences.UserPreferencesService.UserPreferencesKeys.SAVINGS_PERCENTAGE
 import com.carlosdiestro.brokeless.core.framework.preferences.UserPreferencesService.UserPreferencesKeys.TOTAL_BALANCE
+import com.carlosdiestro.brokeless.main.budget.domain.models.Budget
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
@@ -35,6 +39,9 @@ class UserPreferencesService @Inject constructor(
         val CURRENCY_ICON = stringPreferencesKey("currency_icon")
         val AVAILABLE = doublePreferencesKey("available")
         val SAVINGS = doublePreferencesKey("savings")
+        val BUDGET_TOTAL = doublePreferencesKey("budget_total")
+        val BUDGET_CURRENT = doublePreferencesKey("budget_current")
+        val PERIOD = longPreferencesKey("period")
     }
 
     val isFirstTime: Flow<Boolean> =
@@ -104,6 +111,33 @@ class UserPreferencesService @Inject constructor(
     suspend fun updateSavings(value: Double) {
         context.userPreferences.edit { pref ->
             pref[SAVINGS] = value
+        }
+    }
+
+    val budget: Flow<Budget> = context.userPreferences.data.map { pref ->
+        Budget(
+            pref[BUDGET_TOTAL] ?: 0.0,
+            pref[BUDGET_CURRENT] ?: 0.0
+        )
+    }
+
+    suspend fun updateTotalBudget(value: Double) {
+        context.userPreferences.edit { pref ->
+            pref[BUDGET_TOTAL] = value
+        }
+    }
+
+    suspend fun updateCurrentBudget(value: Double) {
+        context.userPreferences.edit { pref ->
+            pref[BUDGET_CURRENT] = value
+        }
+    }
+
+    val period: Flow<Long> = context.userPreferences.data.map { pref -> pref[PERIOD]!! }
+
+    suspend fun updatePeriod(date: Long) {
+        context.userPreferences.edit { pref ->
+            pref[PERIOD] = date
         }
     }
 }
