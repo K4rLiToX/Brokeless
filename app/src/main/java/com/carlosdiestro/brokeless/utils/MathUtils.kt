@@ -3,7 +3,9 @@ package com.carlosdiestro.brokeless.utils
 import java.math.BigDecimal
 import java.math.RoundingMode
 
-infix fun Double.directProportion(total: Double): Double = (this / total).round(2)
+infix fun Double.directProportion(total: Double): Double {
+    return if (total == 0.0) 0.0 else (this / total).round(2)
+}
 
 fun Double.asPercentage(): Double = (this * 100).round(2)
 

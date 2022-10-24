@@ -27,6 +27,7 @@ import com.carlosdiestro.brokeless.core.ui.components.cards.MonthlyTransactionCa
 import com.carlosdiestro.brokeless.core.ui.models.CurrencyPLO
 import com.carlosdiestro.brokeless.core.ui.theme.JetBrainsMono
 import com.carlosdiestro.brokeless.main.wallet.ui.models.MonthlyTransactionPLO
+import com.carlosdiestro.brokeless.onboarding.OnBoardingEvent
 import com.carlosdiestro.brokeless.onboarding.OnBoardingViewModel
 import com.carlosdiestro.brokeless.onboarding.components.OnBoardingButtons
 import com.carlosdiestro.brokeless.onboarding.components.OnBoardingHeader
@@ -98,12 +99,14 @@ fun OnBoardingMonthlyTransactionsScreen(
                 navController.popBackStack()
             },
             onNextClick = {
-                if (!isIncome)
+                if (!isIncome) {
+                    onBoardingViewModel.onEvent(OnBoardingEvent.SubmitMonthlyTransactions)
                     navController.navigate(NavigationDirections.OnBoarding.savings.destination)
-                else
+                } else {
                     navController.navigate(
                         "${NavigationDirections.OnBoarding.monthlyTransactions.destination}/false"
                     )
+                }
             },
             onAddClick = {
                 navController.navigate("${NavigationDirections.OnBoarding.newTransaction.destination}/${!isIncome}")

@@ -1,6 +1,7 @@
 package com.carlosdiestro.brokeless.core.framework.preferences
 
 import android.content.Context
+import android.util.Log
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.*
 import androidx.datastore.preferences.preferencesDataStore
@@ -48,6 +49,7 @@ class UserPreferencesService @Inject constructor(
         context.userPreferences.data.map { pref -> pref[IS_FIRST_TIME] ?: true }
 
     suspend fun updateFirstTime() {
+        Log.d("DEBUG", "Updating First Time")
         context.userPreferences.edit { pref ->
             pref[IS_FIRST_TIME] = false
         }
@@ -72,11 +74,11 @@ class UserPreferencesService @Inject constructor(
     }
 
     val currency: Flow<Currency> = context.userPreferences.data.map { pref ->
-        val id = pref[CURRENCY_ID]!!
-        val name = pref[CURRENCY_NAME]!!
-        val symbol = pref[CURRENCY_SYMBOL]!!
-        val goesFirst = pref[CURRENCY_GOES_FIRST]!!
-        val iconId = pref[CURRENCY_ICON]!!
+        val id = pref[CURRENCY_ID] ?: 1
+        val name = pref[CURRENCY_NAME] ?: "EUR"
+        val symbol = pref[CURRENCY_SYMBOL] ?: "€"
+        val goesFirst = pref[CURRENCY_GOES_FIRST] ?: false
+        val iconId = pref[CURRENCY_ICON] ?: "ic_euro"
 
         Currency(
             id,
@@ -88,6 +90,7 @@ class UserPreferencesService @Inject constructor(
     }
 
     suspend fun updateCurrency(currency: Currency) {
+        Log.d("DEBUG", "Updating Currency: ${currency.symbol}")
         context.userPreferences.edit { pref ->
             pref[CURRENCY_ID] = currency.id
             pref[CURRENCY_NAME] = currency.name
@@ -133,7 +136,8 @@ class UserPreferencesService @Inject constructor(
         }
     }
 
-    val period: Flow<Long> = context.userPreferences.data.map { pref -> pref[PERIOD]!! }
+    val period: Flow<Long> =
+        context.userPreferences.data.map { pref -> pref[PERIOD] ?: System.currentTimeMillis() }
 
     suspend fun updatePeriod(date: Long) {
         context.userPreferences.edit { pref ->

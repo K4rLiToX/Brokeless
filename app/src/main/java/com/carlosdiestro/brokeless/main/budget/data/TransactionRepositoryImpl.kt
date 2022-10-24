@@ -5,6 +5,7 @@ import com.carlosdiestro.brokeless.main.budget.domain.Transaction
 import com.carlosdiestro.brokeless.main.budget.domain.repository.TransactionRepository
 import com.carlosdiestro.brokeless.utils.TimeManager
 import com.carlosdiestro.brokeless.utils.mappers.toDomain
+import com.carlosdiestro.brokeless.utils.mappers.toEntity
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
@@ -14,4 +15,6 @@ class TransactionRepositoryImpl @Inject constructor(
 
     override fun getByPeriod(date: String): Flow<List<Transaction>> =
         dao.getByDate(TimeManager.toLongDate(date)).toDomain()
+
+    override suspend fun insert(transaction: Transaction) = dao.insert(transaction.toEntity())
 }

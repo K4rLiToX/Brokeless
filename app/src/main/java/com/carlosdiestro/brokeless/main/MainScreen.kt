@@ -4,6 +4,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.navigation.NavDestination.Companion.hierarchy
@@ -26,30 +29,42 @@ fun MainScreen(
         NavigationDirections.Main.statistics to R.drawable.ic_statistics
     )
 
+    val mainDestinations = listOf(
+        NavigationDirections.Main.budget.destination,
+        NavigationDirections.Main.wallet.destination,
+        NavigationDirections.Main.statistics.destination
+    )
+
+    var showBottomNavigation by rememberSaveable { mutableStateOf(true) }
+
+    showBottomNavigation = navController.currentDestination?.route in mainDestinations
+
     Scaffold(
         bottomBar = {
-            NavigationBar {
-                val navBackStackEntry by navController.currentBackStackEntryAsState()
-                val currentDestination = navBackStackEntry?.destination
-                navItems.forEach { screen ->
-                    NavigationBarItem(
-                        icon = {
-                            Icon(
-                                painter = painterResource(id = screen.second),
-                                contentDescription = "Nav Item Icon"
-                            )
-                        },
-                        selected = currentDestination?.hierarchy?.any { it.route == screen.first.destination } == true,
-                        onClick = {
-                            navController.navigate(screen.first.destination) {
-                                popUpTo(navController.graph.findStartDestination().id) {
-                                    saveState = true
+            if (showBottomNavigation) {
+                NavigationBar {
+                    val navBackStackEntry by navController.currentBackStackEntryAsState()
+                    val currentDestination = navBackStackEntry?.destination
+                    navItems.forEach { screen ->
+                        NavigationBarItem(
+                            icon = {
+                                Icon(
+                                    painter = painterResource(id = screen.second),
+                                    contentDescription = "Nav Item Icon"
+                                )
+                            },
+                            selected = currentDestination?.hierarchy?.any { it.route == screen.first.destination } == true,
+                            onClick = {
+                                navController.navigate(screen.first.destination) {
+                                    popUpTo(navController.graph.findStartDestination().id) {
+                                        saveState = true
+                                    }
+                                    launchSingleTop = true
+                                    restoreState = true
                                 }
-                                launchSingleTop = true
-                                restoreState = true
                             }
-                        }
-                    )
+                        )
+                    }
                 }
             }
         }

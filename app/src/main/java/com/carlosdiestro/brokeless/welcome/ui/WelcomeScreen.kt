@@ -1,5 +1,6 @@
 package com.carlosdiestro.brokeless.welcome.ui
 
+import android.util.Log
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
@@ -29,6 +30,8 @@ fun WelcomeScreen(
 ) {
     val state = viewModel.state.collectAsState()
     val isFirstTime = state.value.isFirstTime
+
+    Log.d("DEBUG", "Is First Time: $isFirstTime")
 
     ConstraintLayout(
         modifier = Modifier

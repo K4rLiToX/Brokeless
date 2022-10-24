@@ -20,6 +20,7 @@ object Destination {
             const val Root = "budget_root"
             const val Budget = "budget_screen"
             const val Transactions = "budget_transactions"
+            const val NewTransaction = "budget_new_transaction"
         }
 
         object Wallet {

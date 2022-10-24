@@ -18,4 +18,7 @@ sealed interface OnBoardingEvent {
     class UpdateSavingsPercentage(val percentage: Double) : OnBoardingEvent
     class UpdateSavingsText(val value: String) : OnBoardingEvent
     object FinishOnBoarding : OnBoardingEvent
+    object SubmitCurrency: OnBoardingEvent
+    object SubmitTotalBalance: OnBoardingEvent
+    object SubmitMonthlyTransactions: OnBoardingEvent
 }

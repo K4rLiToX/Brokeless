@@ -6,4 +6,5 @@ import kotlinx.coroutines.flow.Flow
 interface TransactionRepository {
 
     fun getByPeriod(date: String): Flow<List<Transaction>>
+    suspend fun insert(transaction: Transaction)
 }

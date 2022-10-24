@@ -34,7 +34,7 @@ fun BrokelessTopBar(
     Row(
         modifier = modifier
             .fillMaxWidth()
-            .padding(horizontal = 24.dp, vertical = 16.dp),
+            .padding(horizontal = 24.dp, vertical = 24.dp),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {
@@ -48,6 +48,7 @@ fun BrokelessTopBar(
         }
         if (titleId != null) {
             Text(
+                modifier = Modifier.fillMaxWidth(),
                 text = stringResource(id = titleId),
                 style = TextStyle(
                     fontSize = 16.sp,

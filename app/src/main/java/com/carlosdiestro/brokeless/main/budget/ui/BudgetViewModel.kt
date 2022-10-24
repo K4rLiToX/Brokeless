@@ -52,8 +52,7 @@ class BudgetViewModel @Inject constructor(
             getBudgetUseCase().collect { response ->
                 _state.update {
                     it.copy(
-                        totalBudget = response.total,
-                        currentBudget = response.current,
+                        budget = response,
                         budgetColorState = getColorState(response)
                     )
                 }

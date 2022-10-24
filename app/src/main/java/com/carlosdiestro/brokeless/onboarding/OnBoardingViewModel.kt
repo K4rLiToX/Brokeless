@@ -4,8 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.carlosdiestro.brokeless.core.ui.models.CurrencyPLO
 import com.carlosdiestro.brokeless.main.wallet.ui.models.MonthlyTransactionPLO
-import com.carlosdiestro.brokeless.onboarding.domain.usecases.MarkOnBoardingAsDoneUseCase
-import com.carlosdiestro.brokeless.onboarding.domain.usecases.SaveInitialInformationUseCase
+import com.carlosdiestro.brokeless.onboarding.domain.usecases.SetUpUseCases
 import com.carlosdiestro.brokeless.utils.*
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -16,8 +15,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class OnBoardingViewModel @Inject constructor(
-    private val saveInitialInformationUseCase: SaveInitialInformationUseCase,
-    private val markOnBoardingAsDoneUseCase: MarkOnBoardingAsDoneUseCase
+    private val setUpUseCases: SetUpUseCases
 ) : ViewModel() {
 
     private var _state: MutableStateFlow<OnBoardingState> = MutableStateFlow(OnBoardingState())
@@ -28,9 +26,12 @@ class OnBoardingViewModel @Inject constructor(
             is OnBoardingEvent.UpdateSelectedCurrency -> updateCurrency(event.currency)
             is OnBoardingEvent.UpdateTotalBalance -> updateTotalBalance(event.balance)
             is OnBoardingEvent.UpdateFixedTransactions -> updateMonthlyTransactions(event.monthlyTransactions)
-            OnBoardingEvent.FinishOnBoarding -> save()
+            OnBoardingEvent.FinishOnBoarding -> finishOnBoarding()
             is OnBoardingEvent.UpdateSavingsPercentage -> updateSavingsPercentage(event.percentage)
             is OnBoardingEvent.UpdateSavingsText -> updateSavingsText(event.value)
+            OnBoardingEvent.SubmitCurrency -> saveCurrency()
+            OnBoardingEvent.SubmitMonthlyTransactions -> saveMonthlyTransactions()
+            OnBoardingEvent.SubmitTotalBalance -> saveTotalBalance()
         }
     }
 
@@ -67,25 +68,20 @@ class OnBoardingViewModel @Inject constructor(
         }
     }
 
-    private fun updateMonthlyTransactions(fixedTransaction: MonthlyTransactionPLO) {
+    private fun updateMonthlyTransactions(monthlyTransactions: MonthlyTransactionPLO) {
         viewModelScope.launch {
             _state.update {
                 it.copy(
-                    monthlyTransactions = it.monthlyTransactions.plus(fixedTransaction)
+                    monthlyTransactions = it.monthlyTransactions.plus(monthlyTransactions)
                 )
             }
         }
     }
 
-    private fun save() {
+    private fun finishOnBoarding() {
         viewModelScope.launch {
-            saveInitialInformationUseCase(
-                totalBalance = state.value.totalBalance.toDouble(),
-                currency = state.value.selectedCurrency!!,
-                monthlyTransactions = state.value.monthlyTransactions,
-                savingsPercentage = state.value.savingsPercentage
-            )
-            markOnBoardingAsDoneUseCase()
+            setUpUseCases.UpdateFirstTimeUseCase().invoke()
+            setUpUseCases.UpdateSavingsPercentageUseCase().invoke(state.value.savingsPercentage)
         }
     }
 
@@ -124,6 +120,25 @@ class OnBoardingViewModel @Inject constructor(
                     savingsText = value.ifBlank { "0.0" }
                 )
             }
+        }
+    }
+
+    private fun saveCurrency() {
+        viewModelScope.launch {
+            setUpUseCases.UpdateCurrencyUseCase().invoke(state.value.selectedCurrency!!)
+        }
+    }
+
+    private fun saveMonthlyTransactions() {
+        viewModelScope.launch {
+            setUpUseCases.UpdateMonthlyTransactionsUseCase().invoke(state.value.monthlyTransactions)
+        }
+    }
+
+    private fun saveTotalBalance() {
+        viewModelScope.launch {
+            setUpUseCases.UpdateTotalBalanceUseCase().invoke(state.value.totalBalance.toDouble())
+            setUpUseCases.UpdateSavingsUseCase().invoke(state.value.totalBalance.toDouble())
         }
     }
 }
