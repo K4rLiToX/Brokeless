@@ -15,6 +15,6 @@ interface TransactionDao {
     @Insert
     suspend fun insert(entities: List<TransactionEntity>)
 
-    @Query("SELECT * FROM transaction_table WHERE date >= :date ORDER BY date DESC")
+    @Query("SELECT * FROM transaction_table WHERE date >= :date ORDER BY id DESC")
     fun getByDate(date: Long): Flow<List<TransactionWithCategory>>
 }

@@ -39,6 +39,7 @@ import com.carlosdiestro.brokeless.main.budget.ui.models.BudgetPLO
 import com.carlosdiestro.brokeless.main.budget.ui.models.TransactionPLO
 import com.carlosdiestro.brokeless.utils.brokelessContentStyle
 import com.carlosdiestro.brokeless.utils.directProportion
+import com.carlosdiestro.brokeless.utils.round
 
 @Composable
 fun BudgetScreen(
@@ -89,7 +90,9 @@ fun BudgetScreen(
             onAddClick = {
                 navController.navigate("${NavigationDirections.Main.newTransactions.destination}/false")
             },
-            onNewMonthClick = {},
+            onNewMonthClick = {
+                viewModel.onEvent(BudgetEvent.NewPeriod)
+            },
             onPayClick = {
                 navController.navigate("${NavigationDirections.Main.newTransactions.destination}/true")
             }
@@ -144,7 +147,7 @@ fun BudgetProgress(
             drawArc(
                 color = budgetColorState,
                 startAngle = -220F,
-                sweepAngle = 220 * currentPercentage.value,
+                sweepAngle = 258 * currentPercentage.value,
                 useCenter = false,
                 style = Stroke(width = 12.dp.toPx(), cap = StrokeCap.Round)
             )
@@ -156,7 +159,7 @@ fun BudgetProgress(
                 verticalArrangement = Arrangement.spacedBy(4.dp, Alignment.CenterVertically)
             ) {
                 BrokelessQuantity(
-                    quantity = "${budget.current}",
+                    quantity = "${budget.current.round(2)}",
                     currency = it,
                     style = TextStyle(
                         fontSize = 36.sp,
@@ -281,7 +284,8 @@ fun LastTransactions(
                     start.linkTo(parent.start)
                     top.linkTo(titleSection.bottom, margin = 16.dp)
                     end.linkTo(parent.end)
-                }
+                },
+            verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             items(lastTransactions) { transaction ->
                 TransactionCard(

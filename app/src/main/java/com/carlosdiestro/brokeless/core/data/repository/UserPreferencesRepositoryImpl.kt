@@ -41,6 +41,8 @@ class UserPreferencesRepositoryImpl @Inject constructor(
     override suspend fun updateTotalBudget(value: Double) =
         service.updateTotalBudget(value)
 
+    override suspend fun resetCurrentBudget(value: Double) = service.resetCurrentBudget(value)
+
     override fun period(): Flow<Long> = service.period
     override suspend fun updatePeriod(date: String) = service.updatePeriod(
         TimeManager.toLongDate(date)

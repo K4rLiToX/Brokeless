@@ -1,7 +1,6 @@
 package com.carlosdiestro.brokeless.core.framework.preferences
 
 import android.content.Context
-import android.util.Log
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.*
 import androidx.datastore.preferences.preferencesDataStore
@@ -49,7 +48,6 @@ class UserPreferencesService @Inject constructor(
         context.userPreferences.data.map { pref -> pref[IS_FIRST_TIME] ?: true }
 
     suspend fun updateFirstTime() {
-        Log.d("DEBUG", "Updating First Time")
         context.userPreferences.edit { pref ->
             pref[IS_FIRST_TIME] = false
         }
@@ -60,7 +58,7 @@ class UserPreferencesService @Inject constructor(
 
     suspend fun updateTotalBalance(value: Double) {
         context.userPreferences.edit { pref ->
-            pref[TOTAL_BALANCE] = value
+            pref[TOTAL_BALANCE] = (pref[TOTAL_BALANCE] ?: 0.0) + value
         }
     }
 
@@ -90,7 +88,6 @@ class UserPreferencesService @Inject constructor(
     }
 
     suspend fun updateCurrency(currency: Currency) {
-        Log.d("DEBUG", "Updating Currency: ${currency.symbol}")
         context.userPreferences.edit { pref ->
             pref[CURRENCY_ID] = currency.id
             pref[CURRENCY_NAME] = currency.name
@@ -105,7 +102,7 @@ class UserPreferencesService @Inject constructor(
 
     suspend fun updateAvailable(value: Double) {
         context.userPreferences.edit { pref ->
-            pref[AVAILABLE] = value
+            pref[AVAILABLE] = (pref[AVAILABLE] ?: 0.0) + value
         }
     }
 
@@ -113,7 +110,7 @@ class UserPreferencesService @Inject constructor(
 
     suspend fun updateSavings(value: Double) {
         context.userPreferences.edit { pref ->
-            pref[SAVINGS] = value
+            pref[SAVINGS] = (pref[SAVINGS] ?: 0.0) + value
         }
     }
 
@@ -131,6 +128,12 @@ class UserPreferencesService @Inject constructor(
     }
 
     suspend fun updateCurrentBudget(value: Double) {
+        context.userPreferences.edit { pref ->
+            pref[BUDGET_CURRENT] = pref[BUDGET_CURRENT]!! + value
+        }
+    }
+
+    suspend fun resetCurrentBudget(value: Double) {
         context.userPreferences.edit { pref ->
             pref[BUDGET_CURRENT] = value
         }

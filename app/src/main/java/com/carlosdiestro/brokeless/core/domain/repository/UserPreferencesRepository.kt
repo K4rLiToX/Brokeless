@@ -27,6 +27,7 @@ interface UserPreferencesRepository {
     fun budget(): Flow<Budget>
     suspend fun updateCurrentBudget(value: Double)
     suspend fun updateTotalBudget(value: Double)
+    suspend fun resetCurrentBudget(value: Double)
 
     fun period(): Flow<Long>
     suspend fun updatePeriod(date: String)

@@ -12,3 +12,7 @@ data class BudgetState(
     val budgetColorState: Color = Blue10,
     val lastTransactions: List<TransactionPLO> = emptyList()
 )
+
+sealed interface BudgetEvent {
+    object NewPeriod : BudgetEvent
+}

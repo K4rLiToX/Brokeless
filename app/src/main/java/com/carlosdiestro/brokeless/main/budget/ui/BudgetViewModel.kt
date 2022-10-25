@@ -10,6 +10,7 @@ import com.carlosdiestro.brokeless.core.ui.theme.Red40
 import com.carlosdiestro.brokeless.core.ui.theme.Red50
 import com.carlosdiestro.brokeless.main.budget.domain.usecases.GetBudgetUseCase
 import com.carlosdiestro.brokeless.main.budget.domain.usecases.GetTransactionsUseCase
+import com.carlosdiestro.brokeless.main.budget.domain.usecases.StartNewPeriodUseCase
 import com.carlosdiestro.brokeless.main.budget.ui.models.BudgetPLO
 import com.carlosdiestro.brokeless.utils.directProportion
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -23,7 +24,8 @@ import javax.inject.Inject
 class BudgetViewModel @Inject constructor(
     private val getCurrencyUseCase: GetCurrencyUseCase,
     private val getBudgetUseCase: GetBudgetUseCase,
-    private val getTransactionsUseCase: GetTransactionsUseCase
+    private val getTransactionsUseCase: GetTransactionsUseCase,
+    private val startNewPeriodUseCase: StartNewPeriodUseCase
 ) : ViewModel() {
 
     private var _state: MutableStateFlow<BudgetState> = MutableStateFlow(BudgetState())
@@ -33,6 +35,18 @@ class BudgetViewModel @Inject constructor(
         fetchCurrency()
         fetchBudget()
         fetchLastTransactions()
+    }
+
+    fun onEvent(event: BudgetEvent) {
+        when(event) {
+            BudgetEvent.NewPeriod -> newPeriod()
+        }
+    }
+
+    private fun newPeriod() {
+        viewModelScope.launch {
+            startNewPeriodUseCase()
+        }
     }
 
     private fun fetchCurrency() {
