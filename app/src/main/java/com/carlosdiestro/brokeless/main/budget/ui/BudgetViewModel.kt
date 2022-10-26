@@ -25,7 +25,7 @@ class BudgetViewModel @Inject constructor(
     private val getCurrencyUseCase: GetCurrencyUseCase,
     private val getBudgetUseCase: GetBudgetUseCase,
     private val getTransactionsUseCase: GetTransactionsUseCase,
-    private val startNewPeriodUseCase: StartNewPeriodUseCase
+    private val startNewPeriodUseCase: StartNewPeriodUseCase,
 ) : ViewModel() {
 
     private var _state: MutableStateFlow<BudgetState> = MutableStateFlow(BudgetState())
@@ -38,7 +38,7 @@ class BudgetViewModel @Inject constructor(
     }
 
     fun onEvent(event: BudgetEvent) {
-        when(event) {
+        when (event) {
             BudgetEvent.NewPeriod -> newPeriod()
         }
     }
@@ -88,10 +88,10 @@ class BudgetViewModel @Inject constructor(
 
     private fun getColorState(budget: BudgetPLO): Color {
         return when (budget.current directProportion budget.total) {
-            in (0.75..1.0) -> Green
+            in (0.75..1.0)  -> Green
             in (0.25..0.74) -> Orange30
             in (0.10..0.24) -> Red40
-            else -> Red50
+            else            -> Red50
         }
     }
 }

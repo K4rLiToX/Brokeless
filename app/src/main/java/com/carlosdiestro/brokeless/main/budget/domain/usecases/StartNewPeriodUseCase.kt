@@ -4,6 +4,8 @@ import com.carlosdiestro.brokeless.core.domain.repository.MonthlyTransactionRepo
 import com.carlosdiestro.brokeless.core.domain.repository.UserPreferencesRepository
 import com.carlosdiestro.brokeless.main.budget.domain.Transaction
 import com.carlosdiestro.brokeless.main.budget.domain.repository.TransactionRepository
+import com.carlosdiestro.brokeless.main.transactions.domain.models.Period
+import com.carlosdiestro.brokeless.main.transactions.domain.repository.PeriodRepository
 import com.carlosdiestro.brokeless.utils.TimeManager
 import com.carlosdiestro.brokeless.utils.asDirectProportion
 import com.carlosdiestro.brokeless.utils.mappers.toDomain
@@ -16,7 +18,8 @@ import javax.inject.Inject
 class StartNewPeriodUseCase @Inject constructor(
     private val monthlyTransactionRepository: MonthlyTransactionRepository,
     private val userPreferencesRepository: UserPreferencesRepository,
-    private val transactionRepository: TransactionRepository
+    private val transactionRepository: TransactionRepository,
+    private val periodRepository: PeriodRepository
 ) {
 
     suspend operator fun invoke() {
@@ -33,8 +36,19 @@ class StartNewPeriodUseCase @Inject constructor(
         // Calculate budget
         val budget = afterExpenses - savingsQuantity
 
+        // Update current period enddate in preferences and db
+        userPreferencesRepository.finishPeriod()
+        val currentPeriodUpdated = userPreferencesRepository.period().first()
+        periodRepository.update(currentPeriodUpdated)
+
         // Start new period
-        userPreferencesRepository.updatePeriod(TimeManager.toStringDate(System.currentTimeMillis()))
+        val newPeriod = Period(
+            id = -1,
+            startDate = TimeManager.nowLong(),
+            endDate = null
+        )
+        val newPeriodId = periodRepository.insert(newPeriod)
+        userPreferencesRepository.newPeriod(newPeriod.copy(id = newPeriodId.toInt()))
 
         // Update total budget and reset former period current budget
         userPreferencesRepository.updateTotalBudget(budget)

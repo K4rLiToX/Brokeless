@@ -8,6 +8,8 @@ import com.carlosdiestro.brokeless.core.framework.database.currency.CurrencyDao
 import com.carlosdiestro.brokeless.core.framework.database.currency.CurrencyEntity
 import com.carlosdiestro.brokeless.core.framework.database.montthly_transactions.MonthlyTransactionDao
 import com.carlosdiestro.brokeless.core.framework.database.montthly_transactions.MonthlyTransactionEntity
+import com.carlosdiestro.brokeless.core.framework.database.period.PeriodDao
+import com.carlosdiestro.brokeless.core.framework.database.period.PeriodEntity
 import com.carlosdiestro.brokeless.core.framework.database.transaction.TransactionDao
 import com.carlosdiestro.brokeless.core.framework.database.transaction.TransactionEntity
 
@@ -17,6 +19,7 @@ import com.carlosdiestro.brokeless.core.framework.database.transaction.Transacti
         CategoryEntity::class,
         MonthlyTransactionEntity::class,
         TransactionEntity::class,
+        PeriodEntity::class,
     ],
     version = 1,
     exportSchema = false
@@ -26,4 +29,5 @@ abstract class BrokelessDatabase : RoomDatabase() {
     abstract fun categoryDao(): CategoryDao
     abstract fun monthlyTransactionDao(): MonthlyTransactionDao
     abstract fun transactionDao(): TransactionDao
+    abstract fun periodDao(): PeriodDao
 }

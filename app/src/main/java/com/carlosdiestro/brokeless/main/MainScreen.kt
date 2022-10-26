@@ -1,12 +1,10 @@
 package com.carlosdiestro.brokeless.main
 
+import androidx.compose.animation.*
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.navigation.NavDestination.Companion.hierarchy
@@ -22,6 +20,8 @@ import com.carlosdiestro.brokeless.core.navigation.NavigationDirections
 fun MainScreen(
     navController: NavHostController
 ) {
+    val navBackStackEntry by navController.currentBackStackEntryAsState()
+    val currentDestination = navBackStackEntry?.destination
 
     val navItems = listOf(
         NavigationDirections.Main.budget to R.drawable.ic_budget,
@@ -35,16 +35,21 @@ fun MainScreen(
         NavigationDirections.Main.statistics.destination
     )
 
-    var showBottomNavigation by rememberSaveable { mutableStateOf(true) }
+    val showBottomNavigation = rememberSaveable { mutableStateOf(true) }
 
-    showBottomNavigation = navController.currentDestination?.route in mainDestinations
+    LaunchedEffect(key1 = currentDestination) {
+        showBottomNavigation.value = navController.currentDestination?.route in mainDestinations
+    }
 
     Scaffold(
         bottomBar = {
-            if (showBottomNavigation) {
+            AnimatedVisibility(
+                visible = showBottomNavigation.value,
+                enter = slideInVertically() + fadeIn(),
+                exit = slideOutVertically() + fadeOut()
+            ) {
                 NavigationBar {
-                    val navBackStackEntry by navController.currentBackStackEntryAsState()
-                    val currentDestination = navBackStackEntry?.destination
+
                     navItems.forEach { screen ->
                         NavigationBarItem(
                             icon = {

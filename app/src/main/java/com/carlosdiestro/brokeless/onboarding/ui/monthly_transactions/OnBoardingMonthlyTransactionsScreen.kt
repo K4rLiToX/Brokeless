@@ -1,5 +1,6 @@
 package com.carlosdiestro.brokeless.onboarding.ui.monthly_transactions
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -184,7 +185,8 @@ fun MonthlyTransactionsList(
     currency: CurrencyPLO
 ) {
     LazyColumn(
-        modifier = modifier
+        modifier = modifier,
+        verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
         items(items) { monthlyTransaction ->
             MonthlyTransactionCard(

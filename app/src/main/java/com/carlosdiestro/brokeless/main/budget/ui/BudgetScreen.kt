@@ -24,6 +24,7 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import androidx.navigation.Navigation
 import com.carlosdiestro.brokeless.R
 import com.carlosdiestro.brokeless.core.navigation.NavigationDirections
 import com.carlosdiestro.brokeless.core.ui.components.BrokelessQuantity
@@ -111,7 +112,7 @@ fun BudgetScreen(
             lastTransactions = lastTransactions,
             currency = currency!!
         ) {
-            // TODO(Navigate to Transactions Screen)
+            navController.navigate(NavigationDirections.Main.transactions.destination)
         }
     }
 }
@@ -185,7 +186,7 @@ fun BudgetProgress(
                         )
                     )
                     BrokelessQuantity(
-                        quantity = "${budget.total}",
+                        quantity = "${budget.total.round(2)}",
                         currency = it,
                         style = TextStyle(
                             fontSize = 18.sp,
@@ -274,7 +275,8 @@ fun LastTransactions(
             BrokelessIconButton(
                 resource = BrokelessIconButtonResource.IconResource(R.drawable.ic_chevron_right),
                 containerColor = MaterialTheme.colorScheme.surface,
-                size = BrokelessIconContainerSize.Small
+                size = BrokelessIconContainerSize.Small,
+                onClick = onSeeMoreClick
             )
         }
 

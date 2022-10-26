@@ -13,6 +13,7 @@ import androidx.navigation.navigation
 import com.carlosdiestro.brokeless.main.MainScreen
 import com.carlosdiestro.brokeless.main.budget.ui.BudgetScreen
 import com.carlosdiestro.brokeless.main.new_transaction.ui.NewTransactionScreen
+import com.carlosdiestro.brokeless.main.transactions.ui.TransactionsScreen
 import com.carlosdiestro.brokeless.onboarding.OnBoardingViewModel
 import com.carlosdiestro.brokeless.onboarding.ui.balance.OnBoardingBalanceScreen
 import com.carlosdiestro.brokeless.onboarding.ui.currency.OnBoardingCurrencyScreen
@@ -69,6 +70,12 @@ fun MainNavGraph(
                 navController,
                 isPayment = it.arguments?.getBoolean("isPayment")!!
             )
+        }
+
+        composable(
+            route = NavigationDirections.Main.transactions.destination
+        ) {
+            TransactionsScreen(navController)
         }
 
         composable(
