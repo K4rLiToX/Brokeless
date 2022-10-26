@@ -3,7 +3,6 @@ package com.carlosdiestro.brokeless.main.transactions.ui
 import com.carlosdiestro.brokeless.core.ui.models.CurrencyPLO
 import com.carlosdiestro.brokeless.main.budget.ui.models.TransactionPLO
 import com.carlosdiestro.brokeless.main.transactions.ui.models.PeriodPLO
-import com.carlosdiestro.brokeless.utils.TimeManager
 
 data class TransactionsState(
     val transactions: List<TransactionPLO> = emptyList(),

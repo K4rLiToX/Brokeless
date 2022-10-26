@@ -2,7 +2,6 @@ package com.carlosdiestro.brokeless.main.budget.ui.models
 
 import androidx.compose.ui.graphics.Color
 import com.carlosdiestro.brokeless.core.ui.models.CategoryPLO
-import com.carlosdiestro.brokeless.core.ui.models.CurrencyPLO
 import com.carlosdiestro.brokeless.core.ui.theme.Green
 import com.carlosdiestro.brokeless.core.ui.theme.Red40
 

@@ -17,7 +17,8 @@ class GetTransactionsUseCase @Inject constructor(
 ) {
 
     operator fun invoke(period: PeriodPLO? = null): Flow<List<TransactionPLO>> = flow {
-        val currentPeriod = period?.let { TimeManager.toLongDate(it.startDate, "d MMM") } ?: userPreferencesRepository.period().first().startDate
+        val currentPeriod = period?.let { TimeManager.toLongDate(it.startDate, "d MMM") }
+            ?: userPreferencesRepository.period().first().startDate
         transactionRepository
             .getByPeriod(TimeManager.toStringDate(currentPeriod))
             .toPLO()

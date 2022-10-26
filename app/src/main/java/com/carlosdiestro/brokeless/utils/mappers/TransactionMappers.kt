@@ -19,7 +19,8 @@ fun TransactionWithCategory.toDomain(): Transaction = Transaction(
 
 fun List<TransactionWithCategory>.toDomain(): List<Transaction> = this.map { it.toDomain() }
 
-fun Flow<List<TransactionWithCategory>>.toDomain(): Flow<List<Transaction>> = this.map { it.toDomain() }
+fun Flow<List<TransactionWithCategory>>.toDomain(): Flow<List<Transaction>> =
+    this.map { it.toDomain() }
 
 fun Transaction.toPLO(): TransactionPLO = TransactionPLO(
     id = id,

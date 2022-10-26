@@ -9,7 +9,6 @@ import com.carlosdiestro.brokeless.core.domain.usecases.ValidateTextUseCase
 import com.carlosdiestro.brokeless.core.ui.models.CategoryPLO
 import com.carlosdiestro.brokeless.main.budget.ui.models.TransactionPLO
 import com.carlosdiestro.brokeless.main.new_transaction.domain.usecases.InsertTransactionUseCase
-import com.carlosdiestro.brokeless.utils.TimeManager
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -47,7 +46,7 @@ class NewTransactionViewModel @Inject constructor(
             is NewTransactionEvent.UpdateQuantity        -> updateQuantity(event.value)
             is NewTransactionEvent.ValidateConcept       -> validateQuantity(event.value)
             is NewTransactionEvent.ValidateTotalQuantity -> validateConcept(event.value)
-            is NewTransactionEvent.SubmitTransaction        -> submitTransaction(event.transaction)
+            is NewTransactionEvent.SubmitTransaction     -> submitTransaction(event.transaction)
         }
     }
 
