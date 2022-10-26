@@ -6,7 +6,9 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
@@ -14,6 +16,8 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import com.carlosdiestro.brokeless.R
 import com.carlosdiestro.brokeless.core.navigation.MainNavGraph
 import com.carlosdiestro.brokeless.core.navigation.NavigationDirections
+import com.carlosdiestro.brokeless.core.ui.theme.Black
+import com.carlosdiestro.brokeless.core.ui.theme.White
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -48,7 +52,11 @@ fun MainScreen(
                 enter = slideInVertically() + fadeIn(),
                 exit = slideOutVertically() + fadeOut()
             ) {
-                NavigationBar {
+                NavigationBar(
+                    modifier = Modifier.shadow(24.dp, ambientColor = Black, spotColor = Black),
+                    containerColor = White,
+                    tonalElevation = 0.dp
+                ) {
 
                     navItems.forEach { screen ->
                         NavigationBarItem(

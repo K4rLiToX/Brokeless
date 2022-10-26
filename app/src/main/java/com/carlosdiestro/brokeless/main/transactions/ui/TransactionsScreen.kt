@@ -3,17 +3,12 @@ package com.carlosdiestro.brokeless.main.transactions.ui
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.snapshotFlow
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -24,6 +19,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.carlosdiestro.brokeless.R
 import com.carlosdiestro.brokeless.core.ui.components.BrokelessTopBar
+import com.carlosdiestro.brokeless.core.ui.components.buttons.ButtonTabs
 import com.carlosdiestro.brokeless.core.ui.components.cards.TransactionCard
 import com.carlosdiestro.brokeless.core.ui.models.CurrencyPLO
 import com.carlosdiestro.brokeless.core.ui.theme.Montserrat
@@ -165,7 +161,7 @@ fun TransactionsContent(
     ) {
         val (filterSection, transactionList) = createRefs()
 
-        TransactionsFilter(
+        ButtonTabs(
             modifier = Modifier
                 .constrainAs(filterSection) {
                     start.linkTo(parent.start)
@@ -174,8 +170,10 @@ fun TransactionsContent(
                     width = Dimension.fillToConstraints
                     height = Dimension.wrapContent
                 },
-            currentFilter = filter,
-            onFiltersClick = onFiltersClick
+            currentTab = filter,
+            titleIdFirst = R.string.action_spent,
+            titleIdSecond = R.string.action_received,
+            onTabClick = onFiltersClick
         )
 
         LazyColumn(
@@ -197,53 +195,3 @@ fun TransactionsContent(
         }
     }
 }
-
-@Composable
-fun TransactionsFilter(
-    modifier: Modifier = Modifier,
-    currentFilter: Int,
-    onFiltersClick: () -> Unit
-) {
-
-    Row(
-        modifier = modifier,
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.SpaceBetween
-    ) {
-        Button(
-            modifier = Modifier.fillMaxWidth(0.48F),
-            colors = ButtonDefaults.buttonColors(
-                containerColor = if (currentFilter == 0) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.surface,
-                contentColor = if (currentFilter == 0) MaterialTheme.colorScheme.onPrimary else MaterialTheme.colorScheme.onSurfaceVariant
-            ),
-            onClick = onFiltersClick
-        ) {
-            Text(
-                text = stringResource(id = R.string.action_spent),
-                style = TextStyle(
-                    fontSize = 14.sp,
-                    fontFamily = Montserrat,
-                    fontWeight = if (currentFilter == 0) FontWeight.SemiBold else FontWeight.Medium
-                )
-            )
-        }
-        Button(
-            modifier = Modifier.fillMaxWidth(),
-            colors = ButtonDefaults.buttonColors(
-                containerColor = if (currentFilter == 0) MaterialTheme.colorScheme.surface else MaterialTheme.colorScheme.primary,
-                contentColor = if (currentFilter == 0) MaterialTheme.colorScheme.onSurfaceVariant else MaterialTheme.colorScheme.onPrimary
-            ),
-            onClick = onFiltersClick
-        ) {
-            Text(
-                text = stringResource(id = R.string.action_received),
-                style = TextStyle(
-                    fontSize = 14.sp,
-                    fontFamily = Montserrat,
-                    fontWeight = if (currentFilter == 0) FontWeight.Medium else FontWeight.SemiBold
-                )
-            )
-        }
-    }
-}
-

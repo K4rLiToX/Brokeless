@@ -14,6 +14,7 @@ import com.carlosdiestro.brokeless.main.MainScreen
 import com.carlosdiestro.brokeless.main.budget.ui.BudgetScreen
 import com.carlosdiestro.brokeless.main.new_transaction.ui.NewTransactionScreen
 import com.carlosdiestro.brokeless.main.transactions.ui.TransactionsScreen
+import com.carlosdiestro.brokeless.main.wallet.ui.WalletScreen
 import com.carlosdiestro.brokeless.onboarding.OnBoardingViewModel
 import com.carlosdiestro.brokeless.onboarding.ui.balance.OnBoardingBalanceScreen
 import com.carlosdiestro.brokeless.onboarding.ui.currency.OnBoardingCurrencyScreen
@@ -81,7 +82,7 @@ fun MainNavGraph(
         composable(
             route = NavigationDirections.Main.wallet.destination
         ) {
-
+            WalletScreen(navController)
         }
         composable(
             route = NavigationDirections.Main.incomes.destination

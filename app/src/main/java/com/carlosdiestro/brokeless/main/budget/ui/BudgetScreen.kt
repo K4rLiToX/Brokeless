@@ -258,8 +258,7 @@ fun LastTransactions(
                     top.linkTo(parent.top)
                     end.linkTo(parent.end)
                     width = Dimension.fillToConstraints
-                }
-                .clickable { onSeeMoreClick() },
+                },
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween
         ) {

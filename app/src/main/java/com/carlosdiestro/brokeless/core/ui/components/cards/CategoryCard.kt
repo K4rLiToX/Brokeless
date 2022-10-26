@@ -32,8 +32,8 @@ fun CategoryCard(
     modifier: Modifier = Modifier,
     category: CategoryPLO,
     currency: CurrencyPLO,
-    spent: Double?,
-    differencePercentage: Int?,
+    spent: Double? = null,
+    differencePercentage: Int? = null,
     isStatisticsScreen: Boolean = false,
     onClick: (CategoryPLO) -> Unit = {}
 ) {
@@ -41,10 +41,10 @@ fun CategoryCard(
     ConstraintLayout(
         modifier = modifier
             .clip(MaterialTheme.shapes.medium)
+            .clickable { onClick(category) }
             .background(White)
             .padding(16.dp)
             .fillMaxWidth()
-            .clickable { onClick(category) }
     ) {
         val (categoryIcon, info, icon) = createRefs()
 
@@ -92,7 +92,7 @@ fun CategoryCard(
                 horizontalArrangement = Arrangement.spacedBy(12.dp)
             ) {
                 BrokelessQuantity(
-                    quantity = if (isStatisticsScreen) spent.toString() else "${category.limit}",
+                    quantity = if (isStatisticsScreen) spent.toString() else "${category.limit ?: 0.0}",
                     currency = currency,
                     style = TextStyle(
                         fontSize = 20.sp,
@@ -123,6 +123,7 @@ fun CategoryCard(
                     end.linkTo(parent.end)
                     bottom.linkTo(info.bottom)
                 },
+            containerColor = MaterialTheme.colorScheme.surface,
             resource = BrokelessIconButtonResource.IconResource(R.drawable.ic_chevron_right),
             size = BrokelessIconContainerSize.Small
         )
