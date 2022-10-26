@@ -89,6 +89,7 @@ fun OnBoardingBalanceScreen(
                 onBoardingViewModel.onEvent(OnBoardingEvent.UpdateTotalBalance(value))
             },
             onNextClicked = {
+                onBoardingViewModel.onEvent(OnBoardingEvent.SubmitTotalBalance)
                 navController.navigate(
                     "${NavigationDirections.OnBoarding.monthlyTransactions.destination}/true"
                 )

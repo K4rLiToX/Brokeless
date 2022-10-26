@@ -38,3 +38,6 @@ fun CurrencyPLO.toDomain(): Currency = Currency(
     goesFirst = goesFirst,
     iconId = ResourceManager.toDrawableValue(iconId)
 )
+
+@JvmName("toPLOCurrency")
+fun Flow<Currency>.toPLO(): Flow<CurrencyPLO> = this.map { it.toPLO() }

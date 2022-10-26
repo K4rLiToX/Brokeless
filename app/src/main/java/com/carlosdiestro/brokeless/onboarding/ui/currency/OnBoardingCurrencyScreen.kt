@@ -87,6 +87,7 @@ fun OnBoardingCurrencyScreen(
             currencies = currencies,
             pagerState = pagerState,
             onNextClick = {
+                onBoardingViewModel.onEvent(OnBoardingEvent.SubmitCurrency)
                 navController.navigate(NavigationDirections.OnBoarding.balance.destination)
             }
         )

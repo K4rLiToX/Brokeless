@@ -23,6 +23,7 @@ import com.carlosdiestro.brokeless.core.ui.models.CurrencyPLO
 import com.carlosdiestro.brokeless.core.ui.theme.JetBrainsMono
 import com.carlosdiestro.brokeless.core.ui.theme.Montserrat
 import com.carlosdiestro.brokeless.core.ui.theme.White
+import com.carlosdiestro.brokeless.utils.round
 
 @Composable
 fun MonthlyTransactionCard(
@@ -87,7 +88,7 @@ fun MonthlyTransactionCard(
                     bottom.linkTo(conceptSection.bottom)
                     width = Dimension.fillToConstraints
                 },
-            quantity = quantity.toString(),
+            quantity = quantity.round(2).toString(),
             currency = currency,
             style = TextStyle(
                 fontSize = 18.sp,

@@ -1,5 +1,6 @@
 package com.carlosdiestro.brokeless.onboarding.ui.monthly_transactions
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -27,6 +28,7 @@ import com.carlosdiestro.brokeless.core.ui.components.cards.MonthlyTransactionCa
 import com.carlosdiestro.brokeless.core.ui.models.CurrencyPLO
 import com.carlosdiestro.brokeless.core.ui.theme.JetBrainsMono
 import com.carlosdiestro.brokeless.main.wallet.ui.models.MonthlyTransactionPLO
+import com.carlosdiestro.brokeless.onboarding.OnBoardingEvent
 import com.carlosdiestro.brokeless.onboarding.OnBoardingViewModel
 import com.carlosdiestro.brokeless.onboarding.components.OnBoardingButtons
 import com.carlosdiestro.brokeless.onboarding.components.OnBoardingHeader
@@ -98,12 +100,14 @@ fun OnBoardingMonthlyTransactionsScreen(
                 navController.popBackStack()
             },
             onNextClick = {
-                if (!isIncome)
+                if (!isIncome) {
+                    onBoardingViewModel.onEvent(OnBoardingEvent.SubmitMonthlyTransactions)
                     navController.navigate(NavigationDirections.OnBoarding.savings.destination)
-                else
+                } else {
                     navController.navigate(
                         "${NavigationDirections.OnBoarding.monthlyTransactions.destination}/false"
                     )
+                }
             },
             onAddClick = {
                 navController.navigate("${NavigationDirections.OnBoarding.newTransaction.destination}/${!isIncome}")
@@ -181,7 +185,8 @@ fun MonthlyTransactionsList(
     currency: CurrencyPLO
 ) {
     LazyColumn(
-        modifier = modifier
+        modifier = modifier,
+        verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
         items(items) { monthlyTransaction ->
             MonthlyTransactionCard(

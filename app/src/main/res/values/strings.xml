@@ -9,7 +9,7 @@
     <string name="action_back">Back</string>
     <string name="action_finish">Finish</string>
     <string name="action_add">Add</string>
-    <string name="action_new_month">New month</string>
+    <string name="action_new_month">New period</string>
     <string name="action_pay">Pay</string>
     <string name="action_spent">Spent</string>
     <string name="action_received">Received</string>

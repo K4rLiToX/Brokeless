@@ -3,32 +3,47 @@ package com.carlosdiestro.brokeless.core.data.repository
 import com.carlosdiestro.brokeless.core.domain.models.Currency
 import com.carlosdiestro.brokeless.core.domain.repository.UserPreferencesRepository
 import com.carlosdiestro.brokeless.core.framework.preferences.UserPreferencesService
+import com.carlosdiestro.brokeless.main.budget.domain.models.Budget
+import com.carlosdiestro.brokeless.main.transactions.domain.models.Period
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class UserPreferencesRepositoryImpl @Inject constructor(
-    private val userPreferencesService: UserPreferencesService
+    private val service: UserPreferencesService
 ) : UserPreferencesRepository {
 
-    override fun isFirstTime(): Flow<Boolean> = userPreferencesService.isFirstTime
-    override suspend fun updateFirstTime() = userPreferencesService.updateFirstTime()
+    override fun isFirstTime(): Flow<Boolean> = service.isFirstTime
+    override suspend fun updateFirstTime() = service.updateFirstTime()
 
-    override fun totalBalance(): Flow<Double> = userPreferencesService.totalBalance
+    override fun totalBalance(): Flow<Double> = service.totalBalance
     override suspend fun updateTotalBalance(value: Double) =
-        userPreferencesService.updateTotalBalance(value)
+        service.updateTotalBalance(value)
 
-    override fun savingsPercentage(): Flow<Double> = userPreferencesService.savingsPercentage
+    override fun savingsPercentage(): Flow<Double> = service.savingsPercentage
     override suspend fun updateSavingsPercentage(value: Double) =
-        userPreferencesService.updateSavingsPercentage(value)
+        service.updateSavingsPercentage(value)
 
-    override fun currency(): Flow<Currency> = userPreferencesService.currency
+    override fun currency(): Flow<Currency> = service.currency
     override suspend fun updateCurrency(currency: Currency) =
-        userPreferencesService.updateCurrency(currency)
+        service.updateCurrency(currency)
 
-    override fun available(): Flow<Double> = userPreferencesService.available
+    override fun available(): Flow<Double> = service.available
     override suspend fun updateAvailable(value: Double) =
-        userPreferencesService.updateAvailable(value)
+        service.updateAvailable(value)
 
-    override fun savings(): Flow<Double> = userPreferencesService.savings
-    override suspend fun updateSavings(value: Double) = userPreferencesService.updateSavings(value)
+    override fun savings(): Flow<Double> = service.savings
+    override suspend fun updateSavings(value: Double) = service.updateSavings(value)
+
+    override fun budget(): Flow<Budget> = service.budget
+    override suspend fun updateCurrentBudget(value: Double) =
+        service.updateCurrentBudget(value)
+
+    override suspend fun updateTotalBudget(value: Double) =
+        service.updateTotalBudget(value)
+
+    override suspend fun resetCurrentBudget(value: Double) = service.resetCurrentBudget(value)
+
+    override fun period(): Flow<Period> = service.period
+    override suspend fun finishPeriod() = service.finishPeriod()
+    override suspend fun newPeriod(period: Period) = service.newPeriod(period)
 }

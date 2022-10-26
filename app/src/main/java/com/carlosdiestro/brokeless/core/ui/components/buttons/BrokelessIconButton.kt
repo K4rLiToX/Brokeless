@@ -6,7 +6,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentSize
-import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -32,15 +32,20 @@ fun BrokelessIconButton(
     size: BrokelessIconContainerSize,
     onClick: () -> Unit = {}
 ) {
+
+    val finalModifier = if (textId == null) modifier
+        .wrapContentSize()
+        .clip(CircleShape) else modifier.wrapContentSize()
+
     Column(
-        modifier = modifier
-            .clip(RoundedCornerShape(100))
-            .wrapContentSize(),
+        modifier = finalModifier,
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(8.dp, Alignment.CenterVertically)
     ) {
         IconButton(
-            modifier = Modifier.size(size.size),
+            modifier = Modifier
+                .size(size.size)
+                .clip(CircleShape),
             onClick = { onClick() },
             colors = IconButtonDefaults.iconButtonColors(
                 containerColor = containerColor,

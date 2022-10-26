@@ -18,15 +18,18 @@ import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
 import com.carlosdiestro.brokeless.core.ui.components.BrokelessIcon
+import com.carlosdiestro.brokeless.core.ui.components.BrokelessQuantity
 import com.carlosdiestro.brokeless.core.ui.components.buttons.BrokelessIconContainerSize
+import com.carlosdiestro.brokeless.core.ui.models.CurrencyPLO
 import com.carlosdiestro.brokeless.core.ui.theme.JetBrainsMono
 import com.carlosdiestro.brokeless.core.ui.theme.Montserrat
 import com.carlosdiestro.brokeless.main.budget.ui.models.TransactionPLO
 
 @Composable
 fun TransactionCard(
-    modifier: Modifier,
+    modifier: Modifier = Modifier,
     transaction: TransactionPLO,
+    currency: CurrencyPLO
 ) {
 
     ConstraintLayout(
@@ -105,15 +108,15 @@ fun TransactionCard(
                 ),
                 textAlign = TextAlign.End
             )
-            Text(
-                text = transaction.quantityText,
+            BrokelessQuantity(
+                quantity = "${transaction.quantity}",
+                currency = currency,
                 style = TextStyle(
                     fontSize = 18.sp,
                     fontFamily = JetBrainsMono,
                     fontWeight = FontWeight.Medium,
                     color = transaction.colorState
-                ),
-                textAlign = TextAlign.End
+                )
             )
         }
     }

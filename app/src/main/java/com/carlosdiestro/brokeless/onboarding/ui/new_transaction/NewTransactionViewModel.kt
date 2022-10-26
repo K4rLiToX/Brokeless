@@ -3,9 +3,12 @@ package com.carlosdiestro.brokeless.onboarding.ui.new_transaction
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.carlosdiestro.brokeless.core.domain.usecases.GetCategoriesUseCase
+import com.carlosdiestro.brokeless.core.domain.usecases.GetCurrencyUseCase
 import com.carlosdiestro.brokeless.core.domain.usecases.ValidateQuantityUseCase
 import com.carlosdiestro.brokeless.core.domain.usecases.ValidateTextUseCase
 import com.carlosdiestro.brokeless.core.ui.models.CategoryPLO
+import com.carlosdiestro.brokeless.main.budget.ui.models.TransactionPLO
+import com.carlosdiestro.brokeless.main.new_transaction.domain.usecases.InsertTransactionUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -14,32 +17,36 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class OnBoardingNewTransactionViewModel @Inject constructor(
+class NewTransactionViewModel @Inject constructor(
     private val getCategoriesUseCase: GetCategoriesUseCase,
+    private val getCurrencyUseCase: GetCurrencyUseCase,
     private val validateQuantityUseCase: ValidateQuantityUseCase,
-    private val validateTextUseCase: ValidateTextUseCase
+    private val validateTextUseCase: ValidateTextUseCase,
+    private val insertTransactionUseCase: InsertTransactionUseCase
 ) : ViewModel() {
 
-    private var _state: MutableStateFlow<OnBoardingNewTransactionState> = MutableStateFlow(
-        OnBoardingNewTransactionState()
+    private var _state: MutableStateFlow<NewTransactionState> = MutableStateFlow(
+        NewTransactionState()
     )
     val state = _state.asStateFlow()
 
     init {
         fetchCategories()
+        fetchCurrency()
     }
 
-    fun onEvent(event: OnBoardingNewTransactionEvent) {
+    fun onEvent(event: NewTransactionEvent) {
         when (event) {
-            OnBoardingNewTransactionEvent.ChangePage               -> changePage()
-            OnBoardingNewTransactionEvent.EnableDateModification   -> enableDateModification()
-            is OnBoardingNewTransactionEvent.UpdateCategory        -> updateCategory(event.category)
-            is OnBoardingNewTransactionEvent.UpdateConcept         -> updateConcept(event.concept)
-            is OnBoardingNewTransactionEvent.UpdateDate            -> updateDate(event.date)
-            is OnBoardingNewTransactionEvent.UpdateDescription     -> updateDescription(event.description)
-            is OnBoardingNewTransactionEvent.UpdateQuantity        -> updateQuantity(event.value)
-            is OnBoardingNewTransactionEvent.ValidateConcept       -> validateQuantity(event.value)
-            is OnBoardingNewTransactionEvent.ValidateTotalQuantity -> validateConcept(event.value)
+            NewTransactionEvent.ChangePage               -> changePage()
+            NewTransactionEvent.EnableDateModification   -> enableDateModification()
+            is NewTransactionEvent.UpdateCategory        -> updateCategory(event.category)
+            is NewTransactionEvent.UpdateConcept         -> updateConcept(event.concept)
+            is NewTransactionEvent.UpdateDate            -> updateDate(event.date)
+            is NewTransactionEvent.UpdateDescription     -> updateDescription(event.description)
+            is NewTransactionEvent.UpdateQuantity        -> updateQuantity(event.value)
+            is NewTransactionEvent.ValidateConcept       -> validateQuantity(event.value)
+            is NewTransactionEvent.ValidateTotalQuantity -> validateConcept(event.value)
+            is NewTransactionEvent.SubmitTransaction     -> submitTransaction(event.transaction)
         }
     }
 
@@ -49,6 +56,18 @@ class OnBoardingNewTransactionViewModel @Inject constructor(
                 _state.update {
                     it.copy(
                         categories = response
+                    )
+                }
+            }
+        }
+    }
+
+    private fun fetchCurrency() {
+        viewModelScope.launch {
+            getCurrencyUseCase().collect { response ->
+                _state.update {
+                    it.copy(
+                        currency = response
                     )
                 }
             }
@@ -157,6 +176,12 @@ class OnBoardingNewTransactionViewModel @Inject constructor(
                     isAdditionalInfoValid = validateTextUseCase(value)
                 )
             }
+        }
+    }
+
+    private fun submitTransaction(transaction: TransactionPLO) {
+        viewModelScope.launch {
+            insertTransactionUseCase(transaction)
         }
     }
 }

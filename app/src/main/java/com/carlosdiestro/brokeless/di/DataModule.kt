@@ -7,6 +7,10 @@ import com.carlosdiestro.brokeless.core.data.repository.UserPreferencesRepositor
 import com.carlosdiestro.brokeless.core.domain.repository.CategoryRepository
 import com.carlosdiestro.brokeless.core.domain.repository.MonthlyTransactionRepository
 import com.carlosdiestro.brokeless.core.domain.repository.UserPreferencesRepository
+import com.carlosdiestro.brokeless.main.budget.data.TransactionRepositoryImpl
+import com.carlosdiestro.brokeless.main.budget.domain.repository.TransactionRepository
+import com.carlosdiestro.brokeless.main.transactions.data.repository.PeriodRepositoryImpl
+import com.carlosdiestro.brokeless.main.transactions.domain.repository.PeriodRepository
 import com.carlosdiestro.brokeless.onboarding.domain.repository.CurrencyRepository
 import dagger.Binds
 import dagger.Module
@@ -33,4 +37,12 @@ abstract class DataModule {
     @Singleton
     @Binds
     abstract fun bindMonthlyTransactionRepository(repository: MonthlyTransactionRepositoryImpl): MonthlyTransactionRepository
+
+    @Singleton
+    @Binds
+    abstract fun bindTransactionRepository(repository: TransactionRepositoryImpl): TransactionRepository
+
+    @Singleton
+    @Binds
+    abstract fun bindPeriodRepository(repository: PeriodRepositoryImpl): PeriodRepository
 }

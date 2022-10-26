@@ -22,6 +22,7 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
 import androidx.navigation.NavController
 import com.carlosdiestro.brokeless.R
+import com.carlosdiestro.brokeless.core.navigation.NavigationDirections
 import com.carlosdiestro.brokeless.core.ui.components.cards.MonthlyTransactionCard
 import com.carlosdiestro.brokeless.core.ui.models.CurrencyPLO
 import com.carlosdiestro.brokeless.core.ui.theme.JetBrainsMono
@@ -84,7 +85,11 @@ fun OnBoardingSavingsScreen(
             onBackClick = { navController.popBackStack() },
             onFinishClick = {
                 onBoardingViewModel.onEvent(OnBoardingEvent.FinishOnBoarding)
-//                navController.navigate(NavigationDirections.Main.root.destination)
+                navController.navigate(NavigationDirections.Main.root.destination) {
+                    popUpTo(NavigationDirections.welcome.destination) {
+                        inclusive = true
+                    }
+                }
             },
             onSliderValueChange = {
                 onBoardingViewModel.onEvent(OnBoardingEvent.UpdateSavingsPercentage(it.toDouble()))

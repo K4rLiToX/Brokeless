@@ -44,7 +44,7 @@ fun OnBoardingNewTransactionScreen(
     navController: NavController,
     onBoardingViewModel: OnBoardingViewModel,
     isExpense: Boolean = false,
-    viewModel: OnBoardingNewTransactionViewModel = hiltViewModel()
+    viewModel: NewTransactionViewModel = hiltViewModel()
 ) {
     val onBoardingState = onBoardingViewModel.state.collectAsState()
     val state = viewModel.state.collectAsState()
@@ -74,10 +74,11 @@ fun OnBoardingNewTransactionScreen(
                     top.linkTo(parent.top)
                     end.linkTo(parent.end)
                 },
+            titleId = if (isExpense) R.string.section_new_expense else R.string.section_new_income,
             leadIconId = R.drawable.ic_back_arrow,
             onLeadIconClick = {
                 if (currentPage == 1) navController.popBackStack()
-                else viewModel.onEvent(OnBoardingNewTransactionEvent.ChangePage)
+                else viewModel.onEvent(NewTransactionEvent.ChangePage)
             }
         )
 
@@ -111,10 +112,10 @@ fun OnBoardingNewTransactionScreen(
                     },
                 isContinueEnabled = isTotalQuantityValid,
                 onContinueClick = {
-                    viewModel.onEvent(OnBoardingNewTransactionEvent.ChangePage)
+                    viewModel.onEvent(NewTransactionEvent.ChangePage)
                 },
                 onKeyClicked = {
-                    viewModel.onEvent(OnBoardingNewTransactionEvent.UpdateQuantity(it))
+                    viewModel.onEvent(NewTransactionEvent.UpdateQuantity(it))
                 }
             )
         } else {
@@ -130,7 +131,7 @@ fun OnBoardingNewTransactionScreen(
 
                 snapshotFlow { pagerState.currentPage }.collect { index ->
                     if (categories.isNotEmpty()) {
-                        viewModel.onEvent(OnBoardingNewTransactionEvent.UpdateCategory(categories[index]))
+                        viewModel.onEvent(NewTransactionEvent.UpdateCategory(categories[index]))
                     }
                 }
             }
@@ -168,10 +169,10 @@ fun OnBoardingNewTransactionScreen(
                     navController.popBackStack()
                 },
                 onConceptValueChange = {
-                    viewModel.onEvent(OnBoardingNewTransactionEvent.UpdateConcept(it))
+                    viewModel.onEvent(NewTransactionEvent.UpdateConcept(it))
                 },
                 onDescriptionValueChange = {
-                    viewModel.onEvent(OnBoardingNewTransactionEvent.UpdateDescription(it))
+                    viewModel.onEvent(NewTransactionEvent.UpdateDescription(it))
                 }
             )
         }
