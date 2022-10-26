@@ -4,6 +4,7 @@ import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Card
@@ -42,9 +43,13 @@ fun WalletCard(
 
     //TODO(Use medium and dark colors for decoration )
 
+    val cardModifier = if (isLarge) modifier
+        .fillMaxWidth()
+        .clickable { onClick() }
+    else modifier.clickable { onClick() }
+
     Card(
-        modifier = modifier
-            .clickable { onClick() },
+        modifier = cardModifier,
         shape = MaterialTheme.shapes.medium,
         colors = CardDefaults.cardColors(
             containerColor = lightColor,

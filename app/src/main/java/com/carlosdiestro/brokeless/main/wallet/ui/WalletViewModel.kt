@@ -4,10 +4,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.carlosdiestro.brokeless.core.domain.usecases.GetCategoriesUseCase
 import com.carlosdiestro.brokeless.core.domain.usecases.GetCurrencyUseCase
-import com.carlosdiestro.brokeless.main.wallet.ui.domain.usecases.GetAvailableUseCase
-import com.carlosdiestro.brokeless.main.wallet.ui.domain.usecases.GetMonthlyTransactionsUseCase
-import com.carlosdiestro.brokeless.main.wallet.ui.domain.usecases.GetSavingsUseCase
-import com.carlosdiestro.brokeless.main.wallet.ui.domain.usecases.GetTotalBalanceUseCase
+import com.carlosdiestro.brokeless.main.wallet.domain.usecases.GetAvailableUseCase
+import com.carlosdiestro.brokeless.main.wallet.domain.usecases.GetMonthlyTransactionsUseCase
+import com.carlosdiestro.brokeless.main.wallet.domain.usecases.GetSavingsUseCase
+import com.carlosdiestro.brokeless.main.wallet.domain.usecases.GetTotalBalanceUseCase
 import com.carlosdiestro.brokeless.utils.expenses
 import com.carlosdiestro.brokeless.utils.incomes
 import com.carlosdiestro.brokeless.utils.total

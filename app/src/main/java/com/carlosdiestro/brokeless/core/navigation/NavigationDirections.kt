@@ -100,17 +100,13 @@ object NavigationDirections {
             override val destination: String
                 get() = Destination.Main.Wallet.CategoryLimit
         }
-        val incomes = object : NavigationCommand {
+        val monthlyTransactions = object : NavigationCommand {
             override val arguments: List<NamedNavArgument>
-                get() = emptyList()
+                get() = listOf(
+                    navArgument("page") { type = NavType.IntType }
+                )
             override val destination: String
-                get() = Destination.Main.Wallet.Incomes
-        }
-        val expenses = object : NavigationCommand {
-            override val arguments: List<NamedNavArgument>
-                get() = emptyList()
-            override val destination: String
-                get() = Destination.Main.Wallet.Expenses
+                get() = Destination.Main.Wallet.MonthlyTransactions
         }
         val statistics = object : NavigationCommand {
             override val arguments: List<NamedNavArgument>

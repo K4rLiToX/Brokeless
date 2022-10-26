@@ -19,6 +19,7 @@ import androidx.constraintlayout.compose.Dimension
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.carlosdiestro.brokeless.R
+import com.carlosdiestro.brokeless.core.navigation.NavigationDirections
 import com.carlosdiestro.brokeless.core.ui.components.BrokelessTopBar
 import com.carlosdiestro.brokeless.core.ui.components.buttons.ButtonTabs
 import com.carlosdiestro.brokeless.core.ui.components.cards.CategoryCard
@@ -91,7 +92,14 @@ fun WalletScreen(
                 available = available,
                 savings = savings,
                 incomes = incomes,
-                expenses = expenses
+                expenses = expenses,
+                onAvailableClick = {},
+                onSavingsClick = {},
+                onMonthlyTransactionsClick = {
+                    navController.navigate(
+                        "${NavigationDirections.Main.monthlyTransactions.destination}/$it"
+                    )
+                }
             )
         } else {
             WalletContentCategories(
@@ -119,7 +127,10 @@ fun WalletContentOverview(
     available: Double,
     savings: Double,
     incomes: Double,
-    expenses: Double
+    expenses: Double,
+    onAvailableClick: () -> Unit = {},
+    onSavingsClick: () -> Unit = {},
+    onMonthlyTransactionsClick: (Int) -> Unit = {}
 ) {
     ConstraintLayout(
         modifier = modifier
@@ -162,7 +173,7 @@ fun WalletContentOverview(
                     mediumColor = Blue30,
                     darkColor = Blue40,
                     isLarge = false
-                )
+                ) { onAvailableClick() }
                 WalletCard(
                     modifier = Modifier.fillMaxWidth(),
                     iconId = R.drawable.ic_savings,
@@ -173,7 +184,7 @@ fun WalletContentOverview(
                     mediumColor = Red40,
                     darkColor = Red50,
                     isLarge = false
-                )
+                ) { onSavingsClick() }
             }
         }
 
@@ -212,7 +223,7 @@ fun WalletContentOverview(
                     mediumColor = Purple20,
                     darkColor = Purple30,
                     isLarge = false
-                )
+                ) { onMonthlyTransactionsClick(0) }
                 WalletCard(
                     modifier = Modifier.fillMaxWidth(),
                     iconId = R.drawable.ic_expenses,
@@ -223,7 +234,7 @@ fun WalletContentOverview(
                     mediumColor = Orange30,
                     darkColor = Orange40,
                     isLarge = false
-                )
+                ) { onMonthlyTransactionsClick(1) }
             }
         }
     }

@@ -27,8 +27,7 @@ object Destination {
             const val Root = "wallet_root"
             const val Wallet = "wallet_screen"
             const val CategoryLimit = "wallet_categories_limit"
-            const val Incomes = "wallet_incomes"
-            const val Expenses = "wallet_expenses"
+            const val MonthlyTransactions = "wallet_monthly_transactions"
         }
 
         object Statistics {

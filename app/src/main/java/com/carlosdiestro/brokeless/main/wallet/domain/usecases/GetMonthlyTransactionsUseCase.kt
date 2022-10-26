@@ -1,4 +1,4 @@
-package com.carlosdiestro.brokeless.main.wallet.ui.domain.usecases
+package com.carlosdiestro.brokeless.main.wallet.domain.usecases
 
 import com.carlosdiestro.brokeless.core.domain.repository.MonthlyTransactionRepository
 import com.carlosdiestro.brokeless.main.wallet.ui.models.MonthlyTransactionPLO
