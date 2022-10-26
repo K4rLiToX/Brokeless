@@ -14,6 +14,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import com.carlosdiestro.brokeless.R
 import com.carlosdiestro.brokeless.core.navigation.MainNavGraph
 import com.carlosdiestro.brokeless.core.navigation.NavigationDirections
+import com.carlosdiestro.brokeless.core.ui.theme.Black
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -52,6 +53,9 @@ fun MainScreen(
 
                     navItems.forEach { screen ->
                         NavigationBarItem(
+                            colors = NavigationBarItemDefaults.colors(
+                                indicatorColor = MaterialTheme.colorScheme.primary,
+                            ),
                             icon = {
                                 Icon(
                                     painter = painterResource(id = screen.second),
