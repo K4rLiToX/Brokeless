@@ -25,8 +25,10 @@ fun Period.toEntity(): PeriodEntity = PeriodEntity(
 
 fun Period.toPLO(): PeriodPLO = PeriodPLO(
     id = id,
-    startDate = TimeManager.toStringDate(startDate, "d MMM"),
-    endDate = endDate?.let { TimeManager.toStringDate(it, "d MMM") } ?: ""
+    simpleStartDate = TimeManager.toStringDate(startDate, "d MMM"),
+    simpleEndDate = endDate?.let { TimeManager.toStringDate(it, "d MMM") } ?: "",
+    startDate = TimeManager.toStringDate(startDate),
+    endDate = endDate?.let { TimeManager.toStringDate(endDate) } ?: ""
 )
 
 fun List<Period>.toPLO(): List<PeriodPLO> = this.map { it.toPLO() }
@@ -35,6 +37,6 @@ fun Flow<List<Period>>.toPLO(): Flow<List<PeriodPLO>> = this.map { it.toPLO() }
 
 fun PeriodPLO.toDomain(): Period = Period(
     id = id,
-    startDate = TimeManager.toLongDate(startDate, "d MMMM"),
-    endDate = if (endDate != "") TimeManager.toLongDate(endDate, "d MMM") else null
+    startDate = TimeManager.toLongDate(startDate),
+    endDate = if (endDate != "") TimeManager.toLongDate(endDate) else null
 )

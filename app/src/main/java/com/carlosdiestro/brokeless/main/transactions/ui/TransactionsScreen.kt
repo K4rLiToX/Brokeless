@@ -8,7 +8,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.snapshotFlow
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -40,7 +42,7 @@ fun TransactionsScreen(
 ) {
     val state = viewModel.state.collectAsState()
     val periods = state.value.periods
-    val transactions = state.value.transactions
+    val transactions = state.value.transactionsByPeriod
     val currency = state.value.currency
     val filter = state.value.filter
     val currentPeriod = state.value.currentPeriod
@@ -134,17 +136,38 @@ fun PeriodPager(
         val period = periods[index]
         val pageOffset = calculateCurrentOffsetForPage(index).absoluteValue
 
-        Text(
+        Column(
             modifier = Modifier
                 .pagerAnimation(pageOffset)
                 .fillMaxWidth(),
-            text = "${period.startDate} - ${period.endDate}",
-            style = TextStyle(
-                fontSize = 28.sp,
-                fontFamily = Montserrat,
-                fontWeight = FontWeight.SemiBold
+            verticalArrangement = Arrangement.spacedBy(4.dp, Alignment.CenterVertically),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Text(
+                text = period.simpleStartDate,
+                style = TextStyle(
+                    fontSize = 28.sp,
+                    fontFamily = Montserrat,
+                    fontWeight = FontWeight.SemiBold
+                )
             )
-        )
+            Text(
+                text = "-",
+                style = TextStyle(
+                    fontSize = 28.sp,
+                    fontFamily = Montserrat,
+                    fontWeight = FontWeight.Medium
+                )
+            )
+            Text(
+                text = if (period.simpleEndDate != "") period.simpleEndDate else stringResource(id = R.string.time_today),
+                style = TextStyle(
+                    fontSize = 28.sp,
+                    fontFamily = Montserrat,
+                    fontWeight = FontWeight.SemiBold
+                )
+            )
+        }
     }
 }
 

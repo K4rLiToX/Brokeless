@@ -3,8 +3,9 @@ package com.carlosdiestro.brokeless.main.transactions.ui
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.carlosdiestro.brokeless.core.domain.usecases.GetCurrencyUseCase
-import com.carlosdiestro.brokeless.main.budget.domain.usecases.GetTransactionsUseCase
 import com.carlosdiestro.brokeless.main.transactions.domain.usecases.GetPeriodsUseCase
+import com.carlosdiestro.brokeless.main.transactions.domain.usecases.GetTransactionsByPeriodUseCase
+import com.carlosdiestro.brokeless.main.transactions.domain.usecases.GetTransactionsUseCase
 import com.carlosdiestro.brokeless.main.transactions.ui.models.PeriodPLO
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -16,6 +17,7 @@ import javax.inject.Inject
 @HiltViewModel
 class TransactionsViewModel @Inject constructor(
     private val getTransactionsUseCase: GetTransactionsUseCase,
+    private val getTransactionsByPeriodUseCase: GetTransactionsByPeriodUseCase,
     private val getPeriodsUseCase: GetPeriodsUseCase,
     private val getCurrencyUseCase: GetCurrencyUseCase
 ) : ViewModel() {
@@ -48,11 +50,13 @@ class TransactionsViewModel @Inject constructor(
 
     private fun updatePeriod(period: PeriodPLO) {
         viewModelScope.launch {
-            getTransactionsUseCase(period).collect { response ->
+            getTransactionsByPeriodUseCase(
+                state.value.transactions,
+                period
+            ).collect { response ->
                 _state.update {
                     it.copy(
-                        transactions = response,
-                        currentPeriod = period
+                        transactionsByPeriod = response
                     )
                 }
             }

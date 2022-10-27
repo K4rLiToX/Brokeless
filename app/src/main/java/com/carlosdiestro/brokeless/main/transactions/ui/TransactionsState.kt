@@ -6,6 +6,7 @@ import com.carlosdiestro.brokeless.main.transactions.ui.models.PeriodPLO
 
 data class TransactionsState(
     val transactions: List<TransactionPLO> = emptyList(),
+    val transactionsByPeriod: List<TransactionPLO> = emptyList(),
     val currency: CurrencyPLO? = null,
     val periods: List<PeriodPLO> = emptyList(),
     val currentPeriod: PeriodPLO? = null,
