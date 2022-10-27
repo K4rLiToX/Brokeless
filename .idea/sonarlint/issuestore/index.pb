@@ -47,8 +47,6 @@ bapp/src/main/java/com/carlosdiestro/brokeless/onboarding/ui/new_transaction/New
 Kapp/src/main/java/com/carlosdiestro/brokeless/main/budget/ui/BudgetState.kt,6\4\64cbb4bbdfed149d6b01515af5603035d1535d0c
 p
 @app/src/main/java/com/carlosdiestro/brokeless/utils/MathUtils.kt,b\e\be9f7e729d21bab89db0bf7e0502fa6dd4eadeae
-ž
-napp/src/main/java/com/carlosdiestro/brokeless/main/new_transaction/domain/usecases/InsertTransactionUseCase.kt,c\1\c12f790882ddf4e5fc8062d6d0df709862fec993
 Š
 Zapp/src/main/java/com/carlosdiestro/brokeless/core/framework/database/BrokelessDatabase.kt,4\2\420c405193ff69fee7066d9cd636036929831348
 Œ
