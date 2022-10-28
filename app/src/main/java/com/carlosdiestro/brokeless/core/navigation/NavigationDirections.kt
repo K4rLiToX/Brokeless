@@ -96,7 +96,9 @@ object NavigationDirections {
         }
         val categoryLimit = object : NavigationCommand {
             override val arguments: List<NamedNavArgument>
-                get() = emptyList()
+                get() = listOf(
+                    navArgument("id") { type = NavType.IntType }
+                )
             override val destination: String
                 get() = Destination.Main.Wallet.CategoryLimit
         }

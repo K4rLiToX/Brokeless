@@ -114,7 +114,11 @@ fun WalletScreen(
                     },
                 currency = currency,
                 categories = categories
-            )
+            ) {
+                navController.navigate(
+                    "${NavigationDirections.Main.categoryLimit.destination}/$it"
+                )
+            }
         }
     }
 }
@@ -244,7 +248,8 @@ fun WalletContentOverview(
 fun WalletContentCategories(
     modifier: Modifier = Modifier,
     currency: CurrencyPLO?,
-    categories: List<CategoryPLO>
+    categories: List<CategoryPLO>,
+    onCategoryClick: (Int) -> Unit
 ) {
     LazyColumn(
         modifier = modifier,
@@ -252,7 +257,9 @@ fun WalletContentCategories(
     ) {
         items(categories) { category ->
             currency?.let {
-                CategoryCard(category = category, currency = it)
+                CategoryCard(category = category, currency = it) { category ->
+                    onCategoryClick(category.id)
+                }
             }
         }
     }
