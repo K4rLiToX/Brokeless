@@ -12,6 +12,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navigation
 import com.carlosdiestro.brokeless.main.MainScreen
 import com.carlosdiestro.brokeless.main.budget.ui.BudgetScreen
+import com.carlosdiestro.brokeless.main.new_monthly_transaction.ui.NewMonthlyTransactionScreen
 import com.carlosdiestro.brokeless.main.new_transaction.ui.NewTransactionScreen
 import com.carlosdiestro.brokeless.main.transactions.ui.TransactionsScreen
 import com.carlosdiestro.brokeless.main.wallet.ui.WalletScreen
@@ -91,6 +92,15 @@ fun MainNavGraph(
         ) {
             MonthlyTransactionsScreen(
                 navController
+            )
+        }
+        composable(
+            route = "${NavigationDirections.Main.newMonthlyTransaction.destination}/{isExpense}",
+            arguments = NavigationDirections.Main.newMonthlyTransaction.arguments
+        ) {
+            NewMonthlyTransactionScreen(
+                navController,
+                isExpense = it.arguments?.getBoolean("isExpense")!!
             )
         }
         composable(

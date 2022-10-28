@@ -108,6 +108,14 @@ object NavigationDirections {
             override val destination: String
                 get() = Destination.Main.Wallet.MonthlyTransactions
         }
+        val newMonthlyTransaction = object : NavigationCommand {
+            override val arguments: List<NamedNavArgument>
+                get() = listOf(
+                    navArgument("isExpense") { type = NavType.BoolType }
+                )
+            override val destination: String
+                get() = Destination.Main.Wallet.NewMonthlyTransaction
+        }
         val statistics = object : NavigationCommand {
             override val arguments: List<NamedNavArgument>
                 get() = emptyList()

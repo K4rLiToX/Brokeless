@@ -16,6 +16,7 @@ import androidx.constraintlayout.compose.Dimension
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.carlosdiestro.brokeless.R
+import com.carlosdiestro.brokeless.core.navigation.NavigationDirections
 import com.carlosdiestro.brokeless.core.ui.components.BrokelessTopBar
 import com.carlosdiestro.brokeless.core.ui.components.buttons.BrokelessButton
 import com.carlosdiestro.brokeless.core.ui.components.cards.MonthlyTransactionCard
@@ -119,7 +120,9 @@ fun MonthlyTransactionsScreen(
             textId = R.string.action_add,
             leftIconId = R.drawable.ic_add,
         ) {
-            // TODO(Navigate to new monthly transaction screen)
+            navController.navigate(
+                "${NavigationDirections.Main.newMonthlyTransaction.destination}/${currentPage != 0}"
+            )
         }
     }
 }

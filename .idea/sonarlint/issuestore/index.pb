@@ -39,8 +39,6 @@ Yapp/src/main/java/com/carlosdiestro/brokeless/onboarding/domain/usecases/SetUpU
 Oapp/src/main/java/com/carlosdiestro/brokeless/onboarding/OnBoardingViewModel.kt,4\2\42257f61e31d7c29dbfa46cf234a0777722d1eb7
 ‰
 Yapp/src/main/java/com/carlosdiestro/brokeless/core/domain/usecases/ValidateTextUseCase.kt,4\f\4f772de4c6897085cfe08b32b4953aa4ac1cc493
-’
-bapp/src/main/java/com/carlosdiestro/brokeless/onboarding/ui/new_transaction/NewTransactionState.kt,6\a\6acbff9856fecea06f4446bcb244662938031e0b
 
 ]app/src/main/java/com/carlosdiestro/brokeless/main/new_transaction/ui/NewTransactionScreen.kt,5\1\51cb3968060089efaa5ba7d2e3ddf07529a527be
 {
@@ -51,8 +49,6 @@ p
 Zapp/src/main/java/com/carlosdiestro/brokeless/core/framework/database/BrokelessDatabase.kt,4\2\420c405193ff69fee7066d9cd636036929831348
 Œ
 \app/src/main/java/com/carlosdiestro/brokeless/core/framework/database/period/PeriodEntity.kt,5\0\50bdbd698c4a6542bf99c7112c223ea6dbb865ac
-n
->app/src/main/java/com/carlosdiestro/brokeless/di/DataModule.kt,8\0\80934b0da130e738560d300b2067f3f59b0010b5
 ”
 dapp/src/main/java/com/carlosdiestro/brokeless/main/transactions/domain/usecases/GetPeriodsUseCase.kt,a\5\a52c5d5eae87dd83c36270db91a71888734a82f7
 Œ
