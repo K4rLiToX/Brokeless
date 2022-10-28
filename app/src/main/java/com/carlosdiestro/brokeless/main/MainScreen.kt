@@ -7,6 +7,7 @@ import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavDestination.Companion.hierarchy
@@ -40,7 +41,7 @@ fun MainScreen(
     )
 
     val showBottomNavigation = rememberSaveable { mutableStateOf(true) }
-
+    val density = LocalDensity.current
     LaunchedEffect(key1 = currentDestination) {
         showBottomNavigation.value = navController.currentDestination?.route in mainDestinations
     }
@@ -49,8 +50,12 @@ fun MainScreen(
         bottomBar = {
             AnimatedVisibility(
                 visible = showBottomNavigation.value,
-                enter = slideInVertically() + fadeIn(),
-                exit = slideOutVertically() + fadeOut()
+                enter = slideInVertically {
+                    with(density) { (it/2).dp.roundToPx() }
+                } + fadeIn(),
+                exit = slideOutVertically {
+                    with(density) { (it/2).dp.roundToPx() }
+                } + fadeOut()
             ) {
                 NavigationBar(
                     modifier = Modifier.shadow(24.dp, ambientColor = Black, spotColor = Black),
