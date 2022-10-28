@@ -4,9 +4,9 @@ import com.carlosdiestro.brokeless.core.ui.models.CategoryPLO
 import com.carlosdiestro.brokeless.core.ui.models.CurrencyPLO
 
 data class CategoryLimitState(
-    val currency: CurrencyPLO,
-    val category: CategoryPLO,
-    val limit: String = category.limit?.toString() ?: "No Limit"
+    val currency: CurrencyPLO? = null,
+    val category: CategoryPLO? = null,
+    val limit: String = category?.limit?.toString() ?: "No Limit"
 )
 
 sealed interface CategoryLimitEvent {
