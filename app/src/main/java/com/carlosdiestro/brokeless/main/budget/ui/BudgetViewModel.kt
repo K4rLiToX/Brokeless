@@ -9,7 +9,7 @@ import com.carlosdiestro.brokeless.core.ui.theme.Orange30
 import com.carlosdiestro.brokeless.core.ui.theme.Red40
 import com.carlosdiestro.brokeless.core.ui.theme.Red50
 import com.carlosdiestro.brokeless.main.budget.domain.usecases.GetBudgetUseCase
-import com.carlosdiestro.brokeless.main.budget.domain.usecases.GetTransactionsUseCase
+import com.carlosdiestro.brokeless.main.budget.domain.usecases.GetRecentTransactionsUseCase
 import com.carlosdiestro.brokeless.main.budget.domain.usecases.StartNewPeriodUseCase
 import com.carlosdiestro.brokeless.main.budget.ui.models.BudgetPLO
 import com.carlosdiestro.brokeless.utils.directProportion
@@ -24,7 +24,7 @@ import javax.inject.Inject
 class BudgetViewModel @Inject constructor(
     private val getCurrencyUseCase: GetCurrencyUseCase,
     private val getBudgetUseCase: GetBudgetUseCase,
-    private val getTransactionsUseCase: GetTransactionsUseCase,
+    private val getRecentTransactionsUseCase: GetRecentTransactionsUseCase,
     private val startNewPeriodUseCase: StartNewPeriodUseCase,
 ) : ViewModel() {
 
@@ -76,10 +76,10 @@ class BudgetViewModel @Inject constructor(
 
     private fun fetchLastTransactions() {
         viewModelScope.launch {
-            getTransactionsUseCase().collect { response ->
+            getRecentTransactionsUseCase().collect { response ->
                 _state.update {
                     it.copy(
-                        lastTransactions = response.take(3)
+                        lastTransactions = response
                     )
                 }
             }

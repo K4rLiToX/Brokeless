@@ -12,8 +12,12 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navigation
 import com.carlosdiestro.brokeless.main.MainScreen
 import com.carlosdiestro.brokeless.main.budget.ui.BudgetScreen
+import com.carlosdiestro.brokeless.main.new_monthly_transaction.ui.NewMonthlyTransactionScreen
 import com.carlosdiestro.brokeless.main.new_transaction.ui.NewTransactionScreen
 import com.carlosdiestro.brokeless.main.transactions.ui.TransactionsScreen
+import com.carlosdiestro.brokeless.main.wallet.ui.WalletScreen
+import com.carlosdiestro.brokeless.main.wallet.ui.category_limit.CategoryLimitScreen
+import com.carlosdiestro.brokeless.main.wallet.ui.monthly_transactions.MonthlyTransactionsScreen
 import com.carlosdiestro.brokeless.onboarding.OnBoardingViewModel
 import com.carlosdiestro.brokeless.onboarding.ui.balance.OnBoardingBalanceScreen
 import com.carlosdiestro.brokeless.onboarding.ui.currency.OnBoardingCurrencyScreen
@@ -81,22 +85,30 @@ fun MainNavGraph(
         composable(
             route = NavigationDirections.Main.wallet.destination
         ) {
-
+            WalletScreen(navController)
         }
         composable(
-            route = NavigationDirections.Main.incomes.destination
+            route = "${NavigationDirections.Main.monthlyTransactions.destination}/{page}",
+            arguments = NavigationDirections.Main.monthlyTransactions.arguments
         ) {
-
+            MonthlyTransactionsScreen(
+                navController
+            )
         }
         composable(
-            route = NavigationDirections.Main.expenses.destination
+            route = "${NavigationDirections.Main.newMonthlyTransaction.destination}/{isExpense}",
+            arguments = NavigationDirections.Main.newMonthlyTransaction.arguments
         ) {
-
+            NewMonthlyTransactionScreen(
+                navController,
+                isExpense = it.arguments?.getBoolean("isExpense")!!
+            )
         }
         composable(
-            route = NavigationDirections.Main.categoryLimit.destination
+            route = "${NavigationDirections.Main.categoryLimit.destination}/{id}",
+            arguments = NavigationDirections.Main.categoryLimit.arguments
         ) {
-
+            CategoryLimitScreen(navController)
         }
 
         composable(

@@ -56,7 +56,7 @@ class StartNewPeriodUseCase @Inject constructor(
 
         // Add budget to total available and total balance
         userPreferencesRepository.updateAvailable(budget)
-        userPreferencesRepository.updateTotalBudget(budget)
+        userPreferencesRepository.updateTotalBalance(afterExpenses)
 
         // Add savings to total savings
         userPreferencesRepository.updateSavings(savingsQuantity)

@@ -52,3 +52,5 @@ fun Transaction.toEntity(): TransactionEntity = TransactionEntity(
     categoryId = category.id,
     date = TimeManager.toLongDate(date)
 )
+
+fun List<Transaction>.toEntity(): List<TransactionEntity> = this.map { it.toEntity() }

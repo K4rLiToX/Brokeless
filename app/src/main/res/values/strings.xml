@@ -73,4 +73,6 @@
 
     <string name="placeholder_percentage">%s%%</string>
 
+    <string name="time_today">Today</string>
+
 </resources>

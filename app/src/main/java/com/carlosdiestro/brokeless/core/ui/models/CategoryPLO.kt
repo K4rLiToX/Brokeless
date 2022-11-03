@@ -3,7 +3,7 @@ package com.carlosdiestro.brokeless.core.ui.models
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 
-class CategoryPLO(
+data class CategoryPLO(
     val id: Int,
     @StringRes val textId: Int,
     @DrawableRes val iconId: Int,

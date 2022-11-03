@@ -4,7 +4,9 @@ import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
@@ -18,6 +20,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.carlosdiestro.brokeless.core.ui.components.BrokelessIcon
+import com.carlosdiestro.brokeless.core.ui.components.BrokelessQuantity
 import com.carlosdiestro.brokeless.core.ui.components.buttons.BrokelessIconContainerSize
 import com.carlosdiestro.brokeless.core.ui.models.CurrencyPLO
 import com.carlosdiestro.brokeless.core.ui.theme.JetBrainsMono
@@ -35,14 +38,18 @@ fun WalletCard(
     mediumColor: Color,
     darkColor: Color,
     isLarge: Boolean,
-    onClick: () -> Unit
+    onClick: () -> Unit = {}
 ) {
 
     //TODO(Use medium and dark colors for decoration )
 
+    val cardModifier = if (isLarge) modifier
+        .fillMaxWidth()
+        .clickable { onClick() }
+    else modifier.clickable { onClick() }
+
     Card(
-        modifier = modifier
-            .clickable { onClick() },
+        modifier = cardModifier,
         shape = MaterialTheme.shapes.medium,
         colors = CardDefaults.cardColors(
             containerColor = lightColor,
@@ -50,12 +57,14 @@ fun WalletCard(
         )
     ) {
         BrokelessIcon(
+            modifier = Modifier.padding(start = 16.dp, top = 16.dp),
             iconId = iconId,
             size = BrokelessIconContainerSize.Small,
             containerColor = White
         )
         Spacer(modifier = Modifier.height(40.dp))
         Text(
+            modifier = Modifier.padding(start = 16.dp),
             text = stringResource(id = title),
             style = TextStyle(
                 fontSize = if (isLarge) 16.sp else 14.sp,
@@ -63,10 +72,11 @@ fun WalletCard(
                 fontWeight = if (isLarge) FontWeight.SemiBold else FontWeight.Medium
             )
         )
-        val quantityText =
-            if (currency.goesFirst) "${currency.symbol}$quantity" else "$quantity${currency.symbol}"
-        Text(
-            text = quantityText,
+
+        BrokelessQuantity(
+            modifier = Modifier.padding(start = 16.dp, bottom = 16.dp),
+            quantity = quantity.toString(),
+            currency = currency,
             style = TextStyle(
                 fontSize = if (isLarge) 40.sp else 20.sp,
                 fontFamily = JetBrainsMono,

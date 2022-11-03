@@ -3,7 +3,6 @@ package com.carlosdiestro.brokeless.main.budget.ui
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Canvas
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -258,8 +257,7 @@ fun LastTransactions(
                     top.linkTo(parent.top)
                     end.linkTo(parent.end)
                     width = Dimension.fillToConstraints
-                }
-                .clickable { onSeeMoreClick() },
+                },
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
