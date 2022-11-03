@@ -15,6 +15,9 @@ fun Category.toPLO(): CategoryPLO = CategoryPLO(
     isActive = isActive
 )
 
+@JvmName("toPLOCategory")
+fun Flow<Category>.toPLO(): Flow<CategoryPLO> = this.map { it.toPLO() }
+
 fun List<Category>.toPLO(): List<CategoryPLO> = this.map { it.toPLO() }
 
 fun Flow<List<Category>>.toPLO(): Flow<List<CategoryPLO>> = this.map { it.toPLO() }
@@ -29,6 +32,9 @@ fun CategoryEntity.toDomain(): Category = Category(
 
 fun List<CategoryEntity>.toDomain(): List<Category> = this.map { it.toDomain() }
 
+@JvmName("toDomainCategoryEntity")
+fun Flow<CategoryEntity>.toDomain(): Flow<Category> = this.map { it.toDomain() }
+
 fun Flow<List<CategoryEntity>>.toDomain(): Flow<List<Category>> = this.map { it.toDomain() }
 
 fun CategoryPLO.toDomain(): Category = Category(
@@ -37,4 +43,12 @@ fun CategoryPLO.toDomain(): Category = Category(
     iconId = ResourceManager.toDrawableValue(iconId),
     limit = limit,
     isActive = isActive
+)
+
+fun Category.toEntity(): CategoryEntity = CategoryEntity(
+    id = id,
+    textId = textId,
+    iconId = iconId,
+    isActive = isActive,
+    limit = limit
 )

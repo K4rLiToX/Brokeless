@@ -1,5 +1,7 @@
 package com.carlosdiestro.brokeless.onboarding.components
 
+import androidx.annotation.DrawableRes
+import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -15,6 +17,10 @@ import com.carlosdiestro.brokeless.core.ui.components.buttons.BrokelessButton
 fun OnBoardingButtons(
     modifier: Modifier = Modifier,
     enabled: Boolean,
+    @DrawableRes leftIconId: Int? = R.drawable.ic_chevron_left,
+    @StringRes leftTextId: Int = R.string.action_back,
+    @DrawableRes rightIconId: Int? = R.drawable.ic_chevron_right,
+    @StringRes rightTextId: Int = R.string.action_next,
     onBackClicked: () -> Unit,
     onNextClicked: () -> Unit
 ) {
@@ -27,15 +33,15 @@ fun OnBoardingButtons(
     ) {
         BrokelessButton(
             fraction = 0.48F,
-            leftIconId = R.drawable.ic_chevron_left,
-            textId = R.string.action_back,
+            leftIconId = leftIconId,
+            textId = leftTextId,
             isColorPrimary = false
         ) {
             onBackClicked()
         }
         BrokelessButton(
-            textId = R.string.action_next,
-            rightIconId = R.drawable.ic_chevron_right,
+            textId = rightTextId,
+            rightIconId = rightIconId,
             enabled = enabled
         ) {
             onNextClicked()
