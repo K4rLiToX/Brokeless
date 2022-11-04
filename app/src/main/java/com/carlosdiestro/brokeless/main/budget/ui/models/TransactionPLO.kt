@@ -5,7 +5,7 @@ import com.carlosdiestro.brokeless.core.ui.models.CategoryPLO
 import com.carlosdiestro.brokeless.core.ui.theme.Green
 import com.carlosdiestro.brokeless.core.ui.theme.Red40
 
-class TransactionPLO(
+data class TransactionPLO(
     val id: Int,
     val concept: String,
     val description: String,

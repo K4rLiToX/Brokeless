@@ -1,12 +1,11 @@
-package com.carlosdiestro.brokeless.statistics.ui
+package com.carlosdiestro.brokeless.main.statistics.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.carlosdiestro.brokeless.core.domain.usecases.GetCurrencyUseCase
-import com.carlosdiestro.brokeless.main.transactions.domain.usecases.GetPeriodsUseCase
-import com.carlosdiestro.brokeless.statistics.domain.usecases.GetCategoriesWithBalanceUseCase
-import com.carlosdiestro.brokeless.statistics.domain.usecases.GetCurrentPeriodUseCase
-import com.carlosdiestro.brokeless.statistics.domain.usecases.GetPeriodBalance
+import com.carlosdiestro.brokeless.main.statistics.domain.usecases.GetCategoriesWithBalanceUseCase
+import com.carlosdiestro.brokeless.main.statistics.domain.usecases.GetCurrentPeriodUseCase
+import com.carlosdiestro.brokeless.main.statistics.domain.usecases.GetPeriodBalance
 import com.carlosdiestro.brokeless.utils.mappers.toPLO
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -14,7 +13,6 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
-import kotlin.math.exp
 
 @HiltViewModel
 class StatisticsViewModel @Inject constructor(

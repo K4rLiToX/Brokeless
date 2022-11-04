@@ -57,7 +57,7 @@ fun CategoryCard(
                 },
             iconId = category.iconId,
             size = BrokelessIconContainerSize.Small,
-            progress = if (category.limit != null && spent != null && differencePercentage != null) BrokelessIconProgress(
+            progress = if (category.limit != null && spent != null) BrokelessIconProgress(
                 current = spent,
                 total = category.limit
             ) else null
@@ -101,9 +101,9 @@ fun CategoryCard(
                         color = MaterialTheme.colorScheme.onSurface
                     )
                 )
-                if (isStatisticsScreen) {
+                if (isStatisticsScreen && differencePercentage != null) {
                     val percentage =
-                        if (differencePercentage!! >= 0) "+$differencePercentage" else "-$differencePercentage"
+                        if (differencePercentage >= 0) "+$differencePercentage" else "-$differencePercentage"
                     Text(
                         text = stringResource(id = R.string.placeholder_percentage, percentage),
                         style = TextStyle(

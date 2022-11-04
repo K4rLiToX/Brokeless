@@ -1,4 +1,4 @@
-package com.carlosdiestro.brokeless.statistics.domain.usecases
+package com.carlosdiestro.brokeless.main.statistics.domain.usecases
 
 import com.carlosdiestro.brokeless.main.budget.domain.repository.TransactionRepository
 import com.carlosdiestro.brokeless.utils.TimeManager
@@ -15,13 +15,14 @@ class GetPeriodBalance @Inject constructor(
     private val repository: TransactionRepository
 ) {
 
-    operator fun invoke(): Flow<Pair<Double, Double>> = getCurrentPeriodUseCase().combine(repository.getAll()) { period, transactions ->
-        val currentTransactions = transactions
-            .toPLO()
-            .filter { TimeManager.toLongDate(it.date) == period.startDate }
-        Pair(
-            currentTransactions.expenses().total(),
-            currentTransactions.incomes().total()
-        )
-    }
+    operator fun invoke(): Flow<Pair<Double, Double>> =
+        getCurrentPeriodUseCase().combine(repository.getAll()) { period, transactions ->
+            val currentTransactions = transactions
+                .toPLO()
+                .filter { TimeManager.toLongDate(it.date) >= period.startDate }
+            Pair(
+                currentTransactions.expenses().total(),
+                currentTransactions.incomes().total()
+            )
+        }
 }

@@ -1,7 +1,7 @@
-package com.carlosdiestro.brokeless.statistics.domain.usecases
+package com.carlosdiestro.brokeless.main.statistics.domain.usecases
 
 import com.carlosdiestro.brokeless.main.budget.domain.repository.TransactionRepository
-import com.carlosdiestro.brokeless.statistics.ui.models.CategoryStatisticsPLO
+import com.carlosdiestro.brokeless.main.statistics.ui.models.CategoryStatisticsPLO
 import com.carlosdiestro.brokeless.utils.TimeManager
 import com.carlosdiestro.brokeless.utils.expenses
 import com.carlosdiestro.brokeless.utils.incomes
@@ -21,15 +21,12 @@ class GetCategoriesWithBalanceUseCase @Inject constructor(
         .combine(getCurrentPeriodUseCase()) { transactions, period ->
             transactions
                 .toPLO()
-                .filter { TimeManager.toLongDate(it.date) == period.startDate }
+                .filter { TimeManager.toLongDate(it.date) >= period.startDate }
                 .groupBy { it.category }
         }.map { map ->
             map.map { (category, transactions) ->
                 CategoryStatisticsPLO(
-                    id = category.id,
-                    textId = category.textId,
-                    iconId = category.iconId,
-                    limit = category.limit,
+                    category = category,
                     spent = transactions.expenses().total(),
                     received = transactions.incomes().total()
                 )

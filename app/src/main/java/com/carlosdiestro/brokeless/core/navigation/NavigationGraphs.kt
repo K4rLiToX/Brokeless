@@ -14,6 +14,7 @@ import com.carlosdiestro.brokeless.main.MainScreen
 import com.carlosdiestro.brokeless.main.budget.ui.BudgetScreen
 import com.carlosdiestro.brokeless.main.new_monthly_transaction.ui.NewMonthlyTransactionScreen
 import com.carlosdiestro.brokeless.main.new_transaction.ui.NewTransactionScreen
+import com.carlosdiestro.brokeless.main.statistics.ui.StatisticsScreen
 import com.carlosdiestro.brokeless.main.transactions.ui.TransactionsScreen
 import com.carlosdiestro.brokeless.main.wallet.ui.WalletScreen
 import com.carlosdiestro.brokeless.main.wallet.ui.category_limit.CategoryLimitScreen
@@ -114,7 +115,7 @@ fun MainNavGraph(
         composable(
             route = NavigationDirections.Main.statistics.destination
         ) {
-
+            StatisticsScreen(navController)
         }
         composable(
             route = NavigationDirections.Main.categoryStatistics.destination

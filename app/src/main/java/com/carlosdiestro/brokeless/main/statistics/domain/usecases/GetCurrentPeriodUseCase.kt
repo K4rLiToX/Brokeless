@@ -1,4 +1,4 @@
-package com.carlosdiestro.brokeless.statistics.domain.usecases
+package com.carlosdiestro.brokeless.main.statistics.domain.usecases
 
 import com.carlosdiestro.brokeless.core.domain.repository.UserPreferencesRepository
 import com.carlosdiestro.brokeless.main.transactions.domain.models.Period
