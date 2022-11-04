@@ -68,7 +68,7 @@ fun CategoryCard(
                 .constrainAs(info) {
                     start.linkTo(categoryIcon.end, margin = 16.dp)
                     top.linkTo(parent.top)
-                    end.linkTo(icon.start)
+                    if (isStatisticsScreen) end.linkTo(parent.end) else end.linkTo(icon.start)
                     bottom.linkTo(parent.bottom)
                     width = Dimension.fillToConstraints
                     height = Dimension.fillToConstraints
@@ -116,16 +116,18 @@ fun CategoryCard(
                 }
             }
         }
-        BrokelessIconButton(
-            modifier = Modifier
-                .constrainAs(icon) {
-                    top.linkTo(info.top)
-                    end.linkTo(parent.end)
-                    bottom.linkTo(info.bottom)
-                },
-            containerColor = MaterialTheme.colorScheme.surface,
-            resource = BrokelessIconButtonResource.IconResource(R.drawable.ic_chevron_right),
-            size = BrokelessIconContainerSize.Small
-        )
+        if (!isStatisticsScreen) {
+            BrokelessIconButton(
+                modifier = Modifier
+                    .constrainAs(icon) {
+                        top.linkTo(info.top)
+                        end.linkTo(parent.end)
+                        bottom.linkTo(info.bottom)
+                    },
+                containerColor = MaterialTheme.colorScheme.surface,
+                resource = BrokelessIconButtonResource.IconResource(R.drawable.ic_chevron_right),
+                size = BrokelessIconContainerSize.Small
+            )
+        }
     }
 }
