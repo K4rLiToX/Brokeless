@@ -7,6 +7,5 @@ import javax.inject.Inject
 class GetFirstTimeUseCase @Inject constructor(
     private val repository: UserPreferencesRepository
 ) {
-
     operator fun invoke(): Flow<Boolean> = repository.isFirstTime()
 }

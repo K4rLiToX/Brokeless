@@ -18,8 +18,6 @@ Papp/src/main/java/com/carlosdiestro/brokeless/main/budget/ui/models/BudgetPLO.k
 {
 Kapp/src/main/java/com/carlosdiestro/brokeless/onboarding/OnBoardingState.kt,c\3\c3d82179dd071e2542ff8ce7b0b55f4caf15f92c
 â
-Yapp/src/main/java/com/carlosdiestro/brokeless/onboarding/domain/usecases/SetUpUseCases.kt,2\a\2a1a95b6549c66ef9de29f3f1bc6071d5693ab4b
-â
 Yapp/src/main/java/com/carlosdiestro/brokeless/core/domain/usecases/ValidateTextUseCase.kt,4\f\4f772de4c6897085cfe08b32b4953aa4ac1cc493
 ç
 ]app/src/main/java/com/carlosdiestro/brokeless/main/new_transaction/ui/NewTransactionScreen.kt,5\1\51cb3968060089efaa5ba7d2e3ddf07529a527be
@@ -61,8 +59,6 @@ Xapp/src/main/java/com/carlosdiestro/brokeless/onboarding/components/OnBoardingB
 aapp/src/main/java/com/carlosdiestro/brokeless/onboarding/ui/balance/OnBoardingBalanceViewModel.kt,4\8\48a7500413a75a4095ee0f50564e4f6c80078ef8
 é
 ^app/src/main/java/com/carlosdiestro/brokeless/onboarding/ui/balance/OnBoardingBalanceScreen.kt,5\d\5db9527a2ba1b4a32d5da2fdbc4df96a3d7cecdd
-
-Oapp/src/main/java/com/carlosdiestro/brokeless/onboarding/OnBoardingViewModel.kt,4\2\42257f61e31d7c29dbfa46cf234a0777722d1eb7
 í
 bapp/src/main/java/com/carlosdiestro/brokeless/main/wallet/ui/category_limit/CategoryLimitScreen.kt,0\1\0167cd020c0cf8d3954319f42c3b5dc78a4dd4db
 ï

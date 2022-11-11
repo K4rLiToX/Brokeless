@@ -1,10 +1,9 @@
 package com.carlosdiestro.brokeless.onboarding.domain.usecases
 
+import com.carlosdiestro.brokeless.core.domain.models.Currency
+import com.carlosdiestro.brokeless.core.domain.models.MonthlyTransaction
 import com.carlosdiestro.brokeless.core.domain.repository.MonthlyTransactionRepository
 import com.carlosdiestro.brokeless.core.domain.repository.UserPreferencesRepository
-import com.carlosdiestro.brokeless.core.ui.models.CurrencyPLO
-import com.carlosdiestro.brokeless.main.wallet.ui.models.MonthlyTransactionPLO
-import com.carlosdiestro.brokeless.utils.mappers.toDomain
 import javax.inject.Inject
 
 class SetUpUseCases @Inject constructor(
@@ -13,8 +12,8 @@ class SetUpUseCases @Inject constructor(
 ) {
 
     inner class UpdateCurrencyUseCase {
-        suspend operator fun invoke(currency: CurrencyPLO) {
-            userPreferencesRepository.updateCurrency(currency.toDomain())
+        suspend operator fun invoke(currency: Currency) {
+            userPreferencesRepository.updateCurrency(currency)
         }
     }
 
@@ -25,8 +24,8 @@ class SetUpUseCases @Inject constructor(
     }
 
     inner class UpdateMonthlyTransactionsUseCase {
-        suspend operator fun invoke(monthlyTransactions: List<MonthlyTransactionPLO>) {
-            monthlyTransactionsRepository.insert(monthlyTransactions.toDomain())
+        suspend operator fun invoke(monthlyTransactions: List<MonthlyTransaction>) {
+            monthlyTransactionsRepository.insert(monthlyTransactions)
         }
     }
 
