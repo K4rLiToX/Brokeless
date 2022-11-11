@@ -56,6 +56,7 @@
     <string name="subsection_new_movement_choose_category">Choose a category</string>
     <string name="subsection_wallet_monthly">Monthly</string>
     <string name="subsection_category_overview_monthly_limit">Monthly Limit</string>
+    <string name="subsection_statistics_by_categories">By Categories</string>
 
 
     <string name="title_balance">Balance</string>

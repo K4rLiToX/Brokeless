@@ -22,6 +22,7 @@ import com.carlosdiestro.brokeless.core.ui.components.buttons.BrokelessIconConta
 import com.carlosdiestro.brokeless.core.ui.theme.*
 import com.carlosdiestro.brokeless.utils.asPercentage
 import com.carlosdiestro.brokeless.utils.directProportion
+import kotlin.math.absoluteValue
 
 @Composable
 fun BrokelessIcon(
@@ -31,12 +32,20 @@ fun BrokelessIcon(
     size: BrokelessIconContainerSize,
     progress: BrokelessIconProgress? = null
 ) {
-    Box(
-        modifier = modifier
+
+    val finalModifier =
+        if (progress != null) modifier
             .clip(RoundedCornerShape(100))
             .background(containerColor)
             .size(size.size)
-            .padding(9.dp),
+        else modifier
+            .clip(RoundedCornerShape(100))
+            .background(containerColor)
+            .size(size.size)
+            .padding(9.dp)
+
+    Box(
+        modifier = finalModifier,
         contentAlignment = Alignment.Center
     ) {
         if (progress != null) {
@@ -67,7 +76,7 @@ class BrokelessIconProgress(
 ) {
     val proportion: Double
         get() {
-            return current directProportion total
+            return current.absoluteValue directProportion total
         }
     val stateColor: Color
         get() {

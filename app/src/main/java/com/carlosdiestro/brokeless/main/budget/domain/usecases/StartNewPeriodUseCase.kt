@@ -44,7 +44,7 @@ class StartNewPeriodUseCase @Inject constructor(
         // Start new period
         val newPeriod = Period(
             id = -1,
-            startDate = TimeManager.nowLong(),
+            startDate = TimeManager.toLongDate(TimeManager.nowString()),
             endDate = null
         )
         val newPeriodId = periodRepository.insert(newPeriod)
@@ -70,7 +70,7 @@ class StartNewPeriodUseCase @Inject constructor(
                     description = "",
                     quantity = transaction.quantity,
                     category = transaction.category.toDomain(),
-                    date = TimeManager.toStringDate(System.currentTimeMillis())
+                    date = TimeManager.nowString()
                 )
             )
         }
