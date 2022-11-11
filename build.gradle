@@ -8,7 +8,7 @@ buildscript {
         classpath("com.google.dagger:hilt-android-gradle-plugin:2.43.2")
     }
     ext {
-        compose_version = '1.4.0-alpha01'
+        compose_version = '1.4.0-alpha02'
     }
 }
 plugins {
