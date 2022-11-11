@@ -15,8 +15,6 @@ Wapp/src/main/java/com/carlosdiestro/brokeless/onboarding/components/OnBoardingH
 ]app/src/main/java/com/carlosdiestro/brokeless/core/domain/usecases/ValidateQuantityUseCase.kt,e\0\e0d450b95c95b9da67210f5c44b5c98285744140
 €
 Papp/src/main/java/com/carlosdiestro/brokeless/main/budget/ui/models/BudgetPLO.kt,f\9\f95abbc97917ab106f4a49aebf17647bf44979fa
-y
-Iapp/src/main/java/com/carlosdiestro/brokeless/welcome/ui/WelcomeScreen.kt,e\3\e35b2b1d8f52ce8162f93ae84c4a8ad06c0c16d5
 {
 Kapp/src/main/java/com/carlosdiestro/brokeless/onboarding/OnBoardingState.kt,c\3\c3d82179dd071e2542ff8ce7b0b55f4caf15f92c
 ‰
